@@ -1,0 +1,17 @@
+{
+  "name": "dnb-eufemia-theme-manager",
+  "version": "1.0.0",
+  "workspaces": [
+    "eufemia-theme-manager-extension"
+  ],
+  "scripts": {
+    "start": "yarn workspace eufemia-theme-manager-extension start",
+    "clean": "yarn workspace eufemia-theme-manager-extension clean",
+    "build:chrome": "yarn workspace eufemia-theme-manager-extension build:chrome",
+    "build:firefox": "yarn workspace eufemia-theme-manager-extension build:firefox",
+    "dev": "yarn workspace eufemia-theme-manager-extension build:watch"
+  },
+  "author": "Tobias Høegh",
+  "license": "SEE LICENSE IN LICENSE FILE",
+  "private": true
+}
