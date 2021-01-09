@@ -4735,10 +4735,10 @@ dispensary@0.59.0:
     source-map-support "~0.5.4"
     yargs "~16.1.0"
 
-dnb-ui-lib@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/dnb-ui-lib/-/dnb-ui-lib-8.0.1.tgz#a2af2542025fc0aabc812f25239e280ad3223f18"
-  integrity sha512-btW31bUawN9kQrkeiu7ibL2QI1zOkZ36ulny2CtxlOQmOoUGUUc8+ND4EVkYL/p84TM6xakTlrgUxuPr8LV1Lw==
+dnb-ui-lib@^8.0.2:
+  version "8.0.2"
+  resolved "https://registry.yarnpkg.com/dnb-ui-lib/-/dnb-ui-lib-8.0.2.tgz#2d0073afefedae14b20f576a5a275a0cc9f92d28"
+  integrity sha512-WpdcIPEcaZMmA54sBljs2NnC4agLzKK8xyDyZQnq2/P1YYEJXK1Dpsi/kY5Fb/y5dow8hQT5644dNHhYx3apmw==
   dependencies:
     "@babel/runtime" "^7.12.5"
     classnames "^2.2.6"
@@ -13589,7 +13589,7 @@ zip-stream@^4.0.0:
     compress-commons "^4.0.2"
     readable-stream "^3.6.0"
 
-zustand@^3.2.0:
+zustand@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.3.0.tgz#dc029b8e0ea710a36dda05f5ca147246969a9104"
   integrity sha512-oTOoJa70tYisd+fRmoIjZKlF21JEmGQ8oC+dJ7pf/wdS4qJPcCS/W9blzKAnyyLMrIYsIl6Mlq5cmili7mpJPw==
