@@ -214,7 +214,7 @@ export function postRehydrationMiddleware() {
 }
 
 function getPersistConfig(name = 'eufemia-theme-data') {
-  const useBrowserStorage = false
+  const useBrowserStorage = true
   return {
     name,
     // blacklist: ['colorTools', 'sgetItempacingTools'],
