@@ -21,6 +21,7 @@ export function fillRemaningColors(originalColorsList, customColorsList) {
 export function getOriginalColorsAsArray() {
   const colors = Object.entries(originalColorsAsObject).map(([key, value]) => {
     const name = key
+      .replace(/--color-/g, ' ')
       .replace(/-/g, ' ')
       .trim()
       .replace(/(^|\s)([a-z])/g, (s) => s.toUpperCase())
