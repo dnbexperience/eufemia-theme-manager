@@ -20,6 +20,7 @@ import { useTheme, useHostStore } from '../core/Store'
 import {
   originalColorsAsArray,
   fillRemaningColors,
+  applyFilter,
 } from '../../shared/ColorController'
 import { useScrollPosition } from '../hooks/Window'
 
@@ -31,7 +32,7 @@ const originalPickerColorsWithTitle = originalColorsAsArray.map(
 export default function ColorItems() {
   useScrollPosition()
   const { getHostData } = useHostStore()
-  const { selectedThemeId } = getHostData()
+  const { filter, selectedThemeId } = getHostData()
   const { colorsList, useColorTools } = useTheme(selectedThemeId)
   const { setColor, resetColor, changeColor } = useColorTools()
 
@@ -47,7 +48,10 @@ export default function ColorItems() {
     )
   }
 
-  const colors = fillRemaningColors(originalColorsAsArray, colorsList)
+  const colors = applyFilter(
+    filter,
+    fillRemaningColors(originalColorsAsArray, colorsList)
+  )
 
   return (
     <List left="1rem">

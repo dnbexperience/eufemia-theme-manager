@@ -5,7 +5,7 @@ import { H2, P } from 'dnb-ui-lib/elements'
 import { ScrollView } from 'dnb-ui-lib/fragments'
 import { Space } from 'dnb-ui-lib/components'
 import Header from './views/Header'
-import ThemeSelector from './views/ThemeSelector'
+import ThemeFilter from './views/ThemeFilter'
 import { generateThemeIgnoreColors } from '../shared/ColorController'
 import Toolbar from './views/Toolbar'
 import ColorItems from './views/ColorItems'
@@ -40,7 +40,7 @@ const Content = () => {
   return (
     <Layout>
       <Header />
-      <ThemeSelector left="1rem" />
+      <ThemeFilter left="1rem" />
       <Toolbar />
       <Main>
         {/* <Space no_collapse top="0.5rem">

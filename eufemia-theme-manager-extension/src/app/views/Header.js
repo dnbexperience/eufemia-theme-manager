@@ -2,26 +2,34 @@ import React from 'react'
 // import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { H1 } from 'dnb-ui-lib'
-// import ThemeSelector from './ThemeSelector'
+import ThemeSelector from './ThemeSelector'
 
 export default function Header() {
   return (
     <HeaderArea>
       <H1 size="medium">Eufemia Theme Manager</H1>
-      {/* <ThemeSelector left="1rem" /> */}
+      <ThemeSelector left="1rem" />
     </HeaderArea>
   )
 }
 
 const HeaderArea = styled.header`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: space-between;
+  /* width: 100%; */
 
   min-height: 4rem;
 
   padding: 0 1rem;
+
+  .dnb-form-row__fieldset {
+    width: auto;
+  }
+  h1 {
+    white-space: nowrap;
+  }
 
   &,
   label {

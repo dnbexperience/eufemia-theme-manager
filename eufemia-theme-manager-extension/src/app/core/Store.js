@@ -156,6 +156,9 @@ const hostStore = (set, get) => ({
   setEnabled: (enabled) => {
     get().setByHost({ enabled })
   },
+  setFilter: (filter) => {
+    get().setByHost({ filter })
+  },
   setCurrentThemeId: (currentThemeId) => {
     get().setByHost({ currentThemeId })
   },
