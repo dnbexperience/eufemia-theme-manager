@@ -5,18 +5,13 @@ import {
   useHostStore,
 } from '../app/core/Store'
 
-const extensionId = String(window.location.host).includes('localhost')
-  ? process.env.REACT_APP_CHROME_EXTENSION_ID
-  : undefined
+const extensionId = process.env.REACT_APP_CHROME_EXTENSION_ID || undefined
 
 export function getTabId(cbFunc) {
   if (browser) {
     browser?.tabs?.query({ currentWindow: true, active: true }, (tabs) => {
       const tabId = tabs[0].id
       cbFunc(tabId)
-      // tabs.forEach(({ id: tabId }) => {
-      //   cbFunc(tabId)
-      // })
     })
   } else {
     cbFunc(null)
