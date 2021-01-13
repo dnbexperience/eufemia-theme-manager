@@ -5,7 +5,10 @@ import {
   useHostStore,
 } from '../app/core/Store'
 
-const extensionId = process.env.REACT_APP_CHROME_EXTENSION_ID || undefined
+const extensionId =
+  (process.env.NODE_ENV === 'development' &&
+    process.env.REACT_APP_CHROME_EXTENSION_ID) ||
+  undefined
 
 export function getTabId(cbFunc) {
   if (browser) {
