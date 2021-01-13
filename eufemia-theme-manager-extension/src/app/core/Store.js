@@ -164,9 +164,6 @@ const hostStore = (set, get) => ({
   },
   getHostData: () => {
     const { hosts } = get()
-    if (typeof window.EXTENSION_HOST === 'undefined') {
-      throw new Error('Host was not set')
-    }
     const res = hosts[window.EXTENSION_HOST] || {
       enabled: false,
       currentThemeId: null,
