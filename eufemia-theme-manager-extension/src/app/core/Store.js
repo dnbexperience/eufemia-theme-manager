@@ -189,26 +189,10 @@ export const useHostStore = create(
   persist(hostStore, getPersistConfig('eufemia-theme-hosts'))
 )
 
-export function postRehydrationMiddleware() {
-  // const theme = extensionStore.getState().getTheme()
-  // const colorsList = theme.colorsList
-  // if (colorsList.length === 0) {
-  //   theme.setState({
-  //     colorsList: originalColorsAsArray().map((props) =>
-  //       fillColorsListWithRemainingColors(props)
-  //     ),
-  //   })
-  // } else {
-  //   const keyRef = getOriginalColorsAsObject()
-  //   const notInList = originalColorsAsArray()
-  //     .filter(({ key }) => !keyRef[key])
-  //     .map((props) => fillColorsListWithRemainingColors(props))
-  //   theme.setState({
-  //     colorsList: colorsList.concat(notInList),
-  //   })
-  // }
-  // extensionStore.setState({ loadingState: 'ready' })
-}
+// export function postRehydrationMiddleware() {
+//   const theme = useTheme.getState().getTheme()
+//   ...
+// }
 
 function getPersistConfig(name = 'eufemia-theme-data') {
   const useBrowserStorage = true
@@ -216,9 +200,7 @@ function getPersistConfig(name = 'eufemia-theme-data') {
     name,
     // blacklist: ['colorTools', 'sgetItempacingTools'],
     // whitelist: ['colorTools', 'spacingTools'],
-    // postRehydrationMiddleware: () => {
-    //   console.log('postRehydrationMiddleware')
-    // },
+    // postRehydrationMiddleware,
     // onRehydrateStorage: () => {
     //   console.log('onRehydrateStorage')
     // },
@@ -229,7 +211,6 @@ function getPersistConfig(name = 'eufemia-theme-data') {
             try {
               browser.storage?.sync.get([name], ({ [name]: themeData }) => {
                 // const themeData = data?.themeData || data || '{}'
-                console.log('getItem', name, themeData)
                 resolve(themeData)
               })
             } catch (e) {
@@ -245,7 +226,7 @@ function getPersistConfig(name = 'eufemia-theme-data') {
         if (useBrowserStorage && browser && browser.storage !== 'undefined') {
           try {
             browser.storage?.sync.set({ [name]: themeData }, () => {
-              console.log('setItem:', name, themeData)
+              // console.log('setItem:', name, themeData)
             })
           } catch (e) {
             console.warn(e)
