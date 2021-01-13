@@ -20,8 +20,8 @@ import { useTheme, useHostStore } from '../core/Store'
 import {
   originalColorsAsArray,
   fillRemaningColors,
-  applyFilter,
 } from '../../shared/ColorController'
+import { applyFilter } from '../core/Utils'
 import { useScrollPosition } from '../hooks/Window'
 
 const originalPickerColors = originalColorsAsArray.map(({ value }) => value)
