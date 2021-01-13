@@ -53,7 +53,13 @@ function getPersistConfig() {
 
 export function applyModifications({ themes }) {
   const { modifications } = useEditorStore.getState()
-  const { css } = compileModifications({ modifications, themes })
+  const { css } = compileModifications({
+    modifications,
+    themes,
+    modifyDeclaration: ({ key, change }) => {
+      return `${key}: ${change};${key.replace('--', `--theme-`)}: ${change};`
+    },
+  })
   insertCSS(css, { elementId: 'eufemia-theme-custom' })
 }
 

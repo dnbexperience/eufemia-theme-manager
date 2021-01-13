@@ -69,13 +69,16 @@ export default class Compiler {
       storeCSSInPage({ css })
     }
   }
-  compileFromTheme(theme) {
-    return this.buildDeclarations(theme.getThemeChanges())
+  compileFromTheme(theme, opts) {
+    return this.buildDeclarations(theme.getThemeChanges(), opts)
   }
-  buildDeclarations(listWithChanges) {
+  buildDeclarations(listWithChanges, { modifyDeclaration = null } = {}) {
     return listWithChanges
       .filter((cur) => cur.change)
       .map(({ key, change }) => {
+        if (typeof modifyDeclaration === 'function') {
+          return modifyDeclaration({ key, change })
+        }
         return `${key}: ${change};`
       })
   }
@@ -84,7 +87,7 @@ export default class Compiler {
   }
 }
 
-export function compileModifications({ modifications, themes }) {
+export function compileModifications({ modifications, themes, ...opts }) {
   if (themes) {
     extensionStorePlain.setState({ themes })
     const { getTheme } = extensionStorePlain.getState()
@@ -93,7 +96,7 @@ export function compileModifications({ modifications, themes }) {
       .map(([path, { themeId }]) => {
         if (themeId && themeId !== 'inactive') {
           const theme = getTheme(themeId)
-          const themeCSS = new Compiler().compileFromTheme(theme).join('')
+          const themeCSS = new Compiler().compileFromTheme(theme, opts).join('')
 
           return `${path}{${themeCSS}}`
         }
