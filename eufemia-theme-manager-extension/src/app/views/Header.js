@@ -1,5 +1,4 @@
 import React from 'react'
-// import { css } from '@emotion/react'
 import styled from '@emotion/styled'
 import { H1 } from 'dnb-ui-lib'
 import ThemeSelector from './ThemeSelector'
@@ -16,9 +15,7 @@ export default function Header() {
 const HeaderArea = styled.header`
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   justify-content: space-between;
-  /* width: 100%; */
 
   min-height: 4rem;
 
