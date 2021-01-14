@@ -50,7 +50,7 @@ const themesStore = (set, get) => ({
   getThemeConstructs: () => {
     return {
       colorsList: [],
-      spacingList: [],
+      spacingsList: [],
     }
   },
   getTheme: (themeId = null) => {
@@ -60,7 +60,8 @@ const themesStore = (set, get) => ({
 
     const setState = (object) => {
       const themes = get().themes
-      themes[themeId] = { ...(themes[themeId] || {}), ...object }
+      themes[themeId] = Object.assign(themes[themeId] || {}, object)
+      // themes[themeId] = { ...(themes[themeId] || {}), ...object }
 
       const state = { themes }
       state.selectedThemeId = themeId
@@ -94,12 +95,12 @@ const themesStore = (set, get) => ({
 
         default: {
           const theme = getState()
-          return [...(theme?.colorsList || []), ...(theme?.spacingList || [])]
+          return [...(theme?.colorsList || []), ...(theme?.spacingsList || [])]
         }
       }
     }
 
-    // Color Theme utils
+    // Color utils
     const changeColor = (origKey, object) => {
       const theme = getState()
       let found
@@ -139,6 +140,45 @@ const themesStore = (set, get) => ({
       }
     }
 
+    // Spacing utils
+    const changeSpacing = (origKey, object) => {
+      const theme = getState()
+      let found
+
+      const spacingsList = (theme?.spacingsList || []).map((item) => {
+        if (item.key === origKey) {
+          found = item = { ...item, ...object }
+        }
+        return item
+      })
+
+      if (!found) {
+        spacingsList.push(Object.assign(object))
+      }
+
+      setState({ spacingsList })
+    }
+    const setSpacing = (origKey, change, fallbackParams = {}) => {
+      changeSpacing(
+        origKey,
+        Object.assign(fallbackParams, {
+          change,
+        })
+      )
+    }
+    const resetSpacing = (rmKey) => {
+      changeSpacing(rmKey, {
+        change: null,
+      })
+    }
+    const useSpacingTools = () => {
+      return {
+        changeSpacing,
+        setSpacing,
+        resetSpacing,
+      }
+    }
+
     return {
       themeId,
       ...getState(),
@@ -146,6 +186,7 @@ const themesStore = (set, get) => ({
       getState,
       getThemeChanges,
       useColorTools,
+      useSpacingTools,
     }
   },
 })
@@ -156,8 +197,15 @@ const hostStore = (set, get) => ({
   setEnabled: (enabled) => {
     get().setByHost({ enabled })
   },
-  setFilter: (filter) => {
-    get().setByHost({ filter })
+  setFilter: (cacheKey, filter) => {
+    const filters = get().getHostData()?.filters || {}
+    const existing = get().getFilter(cacheKey) || {}
+    filters[cacheKey] = Object.assign(existing, filter)
+    get().setByHost({ filters })
+  },
+  getFilter: (cacheKey) => {
+    const data = get().getHostData()
+    return data?.filters ? data.filters[cacheKey] : null
   },
   setCurrentThemeId: (currentThemeId) => {
     get().setByHost({ currentThemeId })
@@ -165,10 +213,14 @@ const hostStore = (set, get) => ({
   setSelectedThemeId: (selectedThemeId) => {
     get().setByHost({ selectedThemeId })
   },
+  setSelectedTab: (selectedTab) => {
+    get().setByHost({ selectedTab })
+  },
   getHostData: () => {
     const { hosts } = get()
     const res = hosts[window.EXTENSION_HOST] || {
       enabled: false,
+      selectedTab: 'colors',
       currentThemeId: null,
       selectedThemeId: 'demo',
     }
@@ -176,10 +228,14 @@ const hostStore = (set, get) => ({
   },
   setByHost: (data) => {
     const { hosts } = get()
-    hosts[window.EXTENSION_HOST] = {
-      ...(hosts[window.EXTENSION_HOST] || {}),
-      ...data,
-    }
+    hosts[window.EXTENSION_HOST] = Object.assign(
+      hosts[window.EXTENSION_HOST] || {},
+      data
+    )
+    // hosts[window.EXTENSION_HOST] = {
+    //   ...(hosts[window.EXTENSION_HOST] || {}),
+    //   ...data,
+    // }
     set({ hosts })
   },
 })

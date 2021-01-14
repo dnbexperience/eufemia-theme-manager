@@ -29,10 +29,10 @@ const originalPickerColorsWithTitle = originalColorsAsArray.map(
   ({ key, value }) => ({ color: value, title: key })
 )
 
-export default function ColorItems() {
+export default function ColorItems({ cacheKey = 'colors' } = {}) {
   useScrollPosition()
-  const { getHostData } = useHostStore()
-  const { filter, selectedThemeId } = getHostData()
+  const { getHostData, getFilter } = useHostStore()
+  const { selectedThemeId } = getHostData()
   const { colorsList, useColorTools } = useTheme(selectedThemeId)
   const { setColor, resetColor, changeColor } = useColorTools()
 
@@ -48,13 +48,14 @@ export default function ColorItems() {
     )
   }
 
+  const filter = getFilter(cacheKey)
   const colors = applyFilter(
     filter,
     fillRemaningColors(originalColorsAsArray, colorsList)
   )
 
   return (
-    <List left="1rem">
+    <List>
       {colors.map((params) => {
         const { key, value, name, change, useCustomColor } = params
         const contrastValue = change

@@ -39,7 +39,7 @@ const StyledDropdown = styled(Dropdown)`
   --dropdown-width: 10rem;
 `
 
-export function ToggleEnabled(porps) {
+export function ToggleEnabled(props) {
   const { setEnabled, getHostData } = useHostStore()
   const { enabled, currentThemeId } = getHostData()
   return (
@@ -49,7 +49,7 @@ export function ToggleEnabled(porps) {
       checked={enabled}
       disabled={!currentThemeId}
       on_change={({ checked }) => setEnabled(checked)}
-      {...porps}
+      {...props}
     />
   )
 }

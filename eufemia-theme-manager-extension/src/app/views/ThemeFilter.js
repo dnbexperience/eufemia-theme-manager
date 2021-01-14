@@ -4,21 +4,21 @@ import { Input, Switch } from 'dnb-ui-lib'
 import { useHostStore } from '../core/Store'
 import { FormRow } from 'dnb-ui-lib'
 
-export default function ThemeFilter(props) {
+export default function ThemeFilter({ cacheKey, ...props }) {
   return (
     <ThemeFilterArea>
       <FormRow {...props}>
-        <ThemePicker right="1rem" />
-        <ToggleEnabled right="1rem" />
+        <SearchInput cacheKey={cacheKey} right="1rem" />
+        <ToggleActive cacheKey={cacheKey} right="1rem" />
       </FormRow>
     </ThemeFilterArea>
   )
 }
 
 let timeout
-export function ThemePicker(props) {
-  const { setFilter, getHostData } = useHostStore()
-  const { filter } = getHostData()
+function SearchInput({ cacheKey, ...props }) {
+  const { setFilter, getFilter } = useHostStore()
+  const filter = getFilter(cacheKey)
   const [value, setValue] = React.useState(filter?.value)
 
   return (
@@ -30,7 +30,7 @@ export function ThemePicker(props) {
         setValue(value)
         clearTimeout(timeout)
         timeout = setTimeout(() => {
-          setFilter({ value })
+          setFilter(cacheKey, { value })
         }, 300)
       }}
       {...props}
@@ -52,16 +52,16 @@ const ThemeFilterArea = styled.div`
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
 `
 
-export function ToggleEnabled(porps) {
-  const { setFilter, getHostData } = useHostStore()
-  const { filter } = getHostData()
+function ToggleActive({ cacheKey, ...props }) {
+  const { setFilter, getFilter } = useHostStore()
+  const filter = getFilter(cacheKey)
   return (
     <Switch
       label="Changed values"
       // label_position="left"
       checked={filter?.active}
-      on_change={({ checked }) => setFilter({ active: checked })}
-      {...porps}
+      on_change={({ checked: active }) => setFilter(cacheKey, { active })}
+      {...props}
     />
   )
 }

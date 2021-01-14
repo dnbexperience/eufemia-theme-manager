@@ -1,14 +1,15 @@
 import React from 'react'
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import { H2, P } from 'dnb-ui-lib/elements'
+import { P } from 'dnb-ui-lib/elements'
 import { ScrollView } from 'dnb-ui-lib/fragments'
-import { Space } from 'dnb-ui-lib/components'
+import { Tabs } from 'dnb-ui-lib/components'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
 import { generateThemeIgnoreColors } from '../shared/ColorController'
 import Toolbar from './views/Toolbar'
 import ColorItems from './views/ColorItems'
+import SpacingItems from './views/SpacingItems'
 import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
 import { getHost } from '../shared/Bridge'
@@ -34,30 +35,56 @@ const Content = () => {
   useCompilerListener()
   useRehydrationMiddleware()
 
-  // const { getHostData } = useThemeStore()
-  const { selectedThemeId } = useHostStore().getHostData()
-
   return (
     <Layout>
       <Header />
-      <ThemeFilter left="1rem" />
       <Toolbar />
-      <Main>
-        {/* <Space no_collapse top="0.5rem">
-          <Hr light />
-        </Space> */}
-        <Space no_collapse top="1rem">
-          <H2 align="center" size="medium">
-            {selectedThemeId}
-          </H2>
-        </Space>
-        <ScrollView>
-          <ScrollViewInner>
-            <ColorItems />
-          </ScrollViewInner>
-        </ScrollView>
-      </Main>
+      <TabsWithContent />
     </Layout>
+  )
+}
+
+function TabsWithContent() {
+  const { getHostData, setSelectedTab } = useHostStore()
+  const { selectedTab } = getHostData()
+
+  return (
+    <Main>
+      <StyledTabs
+        data={[
+          { title: 'Colors', key: 'colors' },
+          { title: 'Spacing', key: 'spacing' },
+        ]}
+        selected_key={selectedTab}
+        on_change={({ selected_key }) => {
+          setSelectedTab(selected_key)
+        }}
+        section_style="mint-green"
+      >
+        {{
+          colors: (
+            <>
+              <ThemeFilter key="colors" cacheKey="colors" />
+              <ScrollView>
+                <ScrollViewInner>
+                  <ColorItems />
+                </ScrollViewInner>
+              </ScrollView>
+            </>
+          ),
+          spacing: (
+            <>
+              <ThemeFilter key="spacing" cacheKey="spacing" />
+              <ScrollView>
+                <ScrollViewInner>
+                  <SpacingItems />
+                </ScrollViewInner>
+              </ScrollView>
+            </>
+          ),
+        }}
+      </StyledTabs>
+    </Main>
   )
 }
 
@@ -94,16 +121,25 @@ function GlobalStyles() {
 
 const Layout = styled.div`
   width: var(--extension-width);
-  /* border: 1px solid var(--color-black-80); */
+`
+
+const StyledTabs = styled(Tabs)`
+  .dnb-tabs__button__snap:first-of-type {
+    padding-left: var(--spacing-small);
+  }
+  .dnb-tabs__content {
+    margin-top: 0;
+  }
 `
 
 const ScrollViewInner = styled.div`
   min-height: var(--extension-height);
+  padding: 0 var(--spacing-x-small);
   padding-bottom: 4rem;
 `
 
 const Main = styled.main`
-  padding: 0 var(--spacing-x-small);
+  /* padding: 0 var(--spacing-x-small); */
 `
 
 const IndicatorArea = styled.div`
