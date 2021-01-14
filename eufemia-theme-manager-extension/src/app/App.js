@@ -91,7 +91,6 @@ function TabsWithContent() {
 
 function GlobalStyles() {
   const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
-    console.log('hello')
     return [
       generateThemeIgnoreColors(),
       generateThemeIgnoreSpacings(),
