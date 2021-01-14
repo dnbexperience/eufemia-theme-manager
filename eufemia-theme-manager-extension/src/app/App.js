@@ -106,11 +106,6 @@ function GlobalStyles() {
           --extension-height: 37rem; /* max 600px */
         }
 
-        html,
-        body {
-          min-height: var(--extension-height);
-        }
-
         body {
           overflow-y: scroll;
           overscroll-behavior-x: none;
@@ -138,7 +133,7 @@ const StyledTabs = styled(Tabs)`
 `
 
 const Main = styled.main`
-  /* padding: 0 var(--spacing-x-small); */
+  min-height: var(--extension-height);
 `
 
 const IndicatorArea = styled.div`
