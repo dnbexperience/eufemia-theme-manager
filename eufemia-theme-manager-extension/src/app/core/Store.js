@@ -1,4 +1,3 @@
-// import React from 'react'
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import browser from '../../shared/Browser'
@@ -236,6 +235,13 @@ const themesStore = (set, get) => ({
   },
 })
 
+const defaultFallback = {
+  enabled: false,
+  selectedTab: 'colors',
+  currentThemeId: null,
+  selectedThemeId: 'demo',
+}
+
 const hostStore = (set, get) => ({
   hosts: {},
 
@@ -263,24 +269,14 @@ const hostStore = (set, get) => ({
   },
   getHostData: () => {
     const { hosts } = get()
-    const res = hosts[window.EXTENSION_HOST] || {
-      enabled: false,
-      selectedTab: 'colors',
-      currentThemeId: null,
-      selectedThemeId: 'demo',
-    }
-    return res
+    return hosts[window.EXTENSION_HOST] || defaultFallback
   },
   setByHost: (data) => {
     const { hosts } = get()
     hosts[window.EXTENSION_HOST] = Object.assign(
-      hosts[window.EXTENSION_HOST] || {},
+      hosts[window.EXTENSION_HOST] || defaultFallback,
       data
     )
-    // hosts[window.EXTENSION_HOST] = {
-    //   ...(hosts[window.EXTENSION_HOST] || {}),
-    //   ...data,
-    // }
     set({ hosts })
   },
 })
