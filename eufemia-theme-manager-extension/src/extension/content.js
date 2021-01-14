@@ -60,7 +60,8 @@ function setLocalThemeModifications() {
         onModification: () => {
           const themes = getLocalThemeData()?.themes
           applyModifications({ themes })
-          // get fresh themes
+
+          // or, get fresh themes
           // getThemesAsync().then(({ themes }) => {
           //   applyModifications({ themes })
           // })

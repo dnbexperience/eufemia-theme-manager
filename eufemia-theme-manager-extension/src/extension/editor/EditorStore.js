@@ -49,6 +49,9 @@ function getPersistConfig() {
   return {
     name: 'eufemia-theme-editor',
     blacklist: ['themesHash'],
+    // onRehydrateStorage: () => {
+    //   console.log('onRehydrateStorage')
+    // },
   }
 }
 

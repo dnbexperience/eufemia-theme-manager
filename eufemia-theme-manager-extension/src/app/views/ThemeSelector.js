@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Dropdown, Switch } from 'dnb-ui-lib'
-import { useThemeStore, useHostStore } from '../core/Store'
+import { useThemeStore, useAppStore } from '../core/Store'
 import { FormRow } from 'dnb-ui-lib'
 
 export default function ThemeSelector(props) {
@@ -15,7 +15,7 @@ export default function ThemeSelector(props) {
 
 export function ThemePicker(props) {
   const { getThemes } = useThemeStore()
-  const { getHostData, setCurrentThemeId } = useHostStore()
+  const { getHostData, setCurrentThemeId } = useAppStore()
   const { currentThemeId } = getHostData()
 
   const themesList = Object.entries(getThemes()).map(([key]) => key)
@@ -40,7 +40,7 @@ const StyledDropdown = styled(Dropdown)`
 `
 
 export function ToggleEnabled(props) {
-  const { setEnabled, getHostData } = useHostStore()
+  const { setEnabled, getHostData } = useAppStore()
   const { enabled, currentThemeId } = getHostData()
   return (
     <Switch

@@ -16,7 +16,7 @@ import {
   P,
 } from 'dnb-ui-lib'
 import { arrow_right } from 'dnb-ui-lib/icons'
-import { useTheme, useHostStore } from '../core/Store'
+import { useTheme, useAppStore } from '../core/Store'
 import {
   originalColorsAsArray,
   fillRemaningColors,
@@ -31,7 +31,7 @@ const originalPickerColorsWithTitle = originalColorsAsArray.map(
 
 export default function ColorItems({ cacheKey = 'colors' } = {}) {
   useScrollPosition()
-  const { getHostData, getFilter } = useHostStore()
+  const { getHostData, getFilter } = useAppStore()
   const { selectedThemeId } = getHostData()
   const { colorsList, useColorTools } = useTheme(selectedThemeId)
   const { setColor, resetColor, changeColor } = useColorTools()

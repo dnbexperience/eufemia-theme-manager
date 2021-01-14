@@ -1,8 +1,8 @@
 import React from 'react'
-import { useHostStore } from '../core/Store'
+import { useWindowStore } from '../core/Store'
 
 export const useScrollPosition = (elem = window) => {
-  const { getHostData, setByHost } = useHostStore()
+  const { getHostData, setByHost } = useWindowStore()
   const { selectedThemeId } = getHostData()
 
   return React.useEffect(() => {

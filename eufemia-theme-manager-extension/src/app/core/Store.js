@@ -283,10 +283,16 @@ const hostStore = (set, get) => ({
 
 export const extensionStorePlain = create(themesStore)
 
-export const useThemeStore = create(persist(themesStore, getPersistConfig()))
+export const useThemeStore = create(
+  persist(themesStore, getPersistConfig('eufemia-theme-data'))
+)
 
-export const useHostStore = create(
-  persist(hostStore, getPersistConfig('eufemia-theme-hosts'))
+export const useAppStore = create(
+  persist(hostStore, getPersistConfig('eufemia-theme-app'))
+)
+
+export const useWindowStore = create(
+  persist(hostStore, getPersistConfig('eufemia-theme-window'))
 )
 
 // export function postRehydrationMiddleware() {
@@ -294,7 +300,7 @@ export const useHostStore = create(
 //   ...
 // }
 
-function getPersistConfig(name = 'eufemia-theme-data') {
+function getPersistConfig(name) {
   const useBrowserStorage = true
   return {
     name,

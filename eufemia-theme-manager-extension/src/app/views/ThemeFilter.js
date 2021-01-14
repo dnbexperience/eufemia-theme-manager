@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Input, Switch } from 'dnb-ui-lib'
-import { useHostStore } from '../core/Store'
+import { useAppStore } from '../core/Store'
 import { FormRow } from 'dnb-ui-lib'
 
 export default function ThemeFilter({ cacheKey, ...props }) {
@@ -17,7 +17,7 @@ export default function ThemeFilter({ cacheKey, ...props }) {
 
 let timeout
 function SearchInput({ cacheKey, ...props }) {
-  const { setFilter, getFilter } = useHostStore()
+  const { setFilter, getFilter } = useAppStore()
   const filter = getFilter(cacheKey)
   const [value, setValue] = React.useState(filter?.value)
 
@@ -53,7 +53,7 @@ const ThemeFilterArea = styled.div`
 `
 
 function ToggleActive({ cacheKey, ...props }) {
-  const { setFilter, getFilter } = useHostStore()
+  const { setFilter, getFilter } = useAppStore()
   const filter = getFilter(cacheKey)
   return (
     <Switch

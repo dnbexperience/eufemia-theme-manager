@@ -2,14 +2,14 @@ import React from 'react'
 import browser from './Browser'
 import {
   useThemeStore,
-  useHostStore,
+  useAppStore,
   extensionStorePlain,
 } from '../app/core/Store'
 import { insertCSS } from './DOM'
 import {
   insertCSSIntoPage,
   storeCSSInPage,
-  makeThemesAvailable,
+  storeThemesInPage,
 } from '../shared/Bridge'
 
 export const useCompilerListener = () =>
@@ -19,7 +19,7 @@ export const useCompilerListener = () =>
 export default class Compiler {
   listen() {
     const unsubStore = useThemeStore.subscribe(this.run)
-    const unsubHost = useHostStore.subscribe(this.run)
+    const unsubHost = useAppStore.subscribe(this.run)
 
     return () => {
       unsubStore()
@@ -28,9 +28,8 @@ export default class Compiler {
   }
   run = () => {
     const { themes } = useThemeStore.getState()
-    makeThemesAvailable(themes)
 
-    const { getHostData } = useHostStore.getState()
+    const { getHostData } = useAppStore.getState()
     const { enabled, currentThemeId } = getHostData()
 
     if (enabled) {
@@ -43,6 +42,9 @@ export default class Compiler {
     } else {
       this.reset()
     }
+
+    // have to run after insert/store css
+    storeThemesInPage(themes)
   }
   reset() {
     this.setCSS('')

@@ -12,7 +12,7 @@ import {
   H3,
 } from 'dnb-ui-lib'
 import { arrow_right } from 'dnb-ui-lib/icons'
-import { useTheme, useHostStore } from '../core/Store'
+import { useTheme, useAppStore } from '../core/Store'
 import {
   originalFontsizesAsArray,
   fillRemaningFontsizes,
@@ -30,7 +30,7 @@ const originalPickerFontsizesWithTitle = originalFontsizesAsArray.map(
 
 export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
   useScrollPosition()
-  const { getHostData, getFilter } = useHostStore()
+  const { getHostData, getFilter } = useAppStore()
   const { selectedThemeId } = getHostData()
   const { fontsizesList, useFontsizeTools } = useTheme(selectedThemeId)
   const { setFontsize, resetFontsize } = useFontsizeTools()

@@ -10,11 +10,11 @@ import {
   Dropdown,
 } from 'dnb-ui-lib'
 import { exclamation_circled } from 'dnb-ui-lib/icons'
-import { useThemeStore, useHostStore } from '../core/Store'
+import { useThemeStore, useAppStore } from '../core/Store'
 
 export default function ThemeManager(props) {
   const { getThemes, createEmptyTheme, copySelectedTheme } = useThemeStore()
-  const { getHostData, setSelectedThemeId } = useHostStore()
+  const { getHostData, setSelectedThemeId } = useAppStore()
   const { selectedThemeId } = getHostData()
   const themesList = Object.entries(getThemes())
     .map(([key]) => key)
@@ -140,7 +140,7 @@ function CreateTheme({ onSave, onCancel }) {
 
 export function RemoveTheme(props) {
   const { removeTheme } = useThemeStore()
-  const { getHostData, setSelectedThemeId } = useHostStore()
+  const { getHostData, setSelectedThemeId } = useAppStore()
   const { selectedThemeId } = getHostData()
 
   return ['dnb-ui', 'blue-test'].includes(selectedThemeId) ? null : (

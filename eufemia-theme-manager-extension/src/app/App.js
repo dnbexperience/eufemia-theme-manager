@@ -16,7 +16,7 @@ import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
 import { getHost } from '../shared/Bridge'
 import { waitForPromise } from './core/Utils'
-import { useHostStore } from './core/Store'
+import { useAppStore } from './core/Store'
 
 export default function App() {
   return (
@@ -47,7 +47,7 @@ const Content = () => {
 }
 
 function TabsWithContent() {
-  const { getHostData, setSelectedTab } = useHostStore()
+  const { getHostData, setSelectedTab } = useAppStore()
   const { selectedTab } = getHostData()
 
   return (

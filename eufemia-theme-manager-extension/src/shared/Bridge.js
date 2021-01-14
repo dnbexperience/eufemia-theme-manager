@@ -2,7 +2,7 @@ import browser from './Browser'
 import { insertCSS } from './DOM'
 import {
   useThemeStore as backgroundStore,
-  useHostStore,
+  useAppStore,
 } from '../app/core/Store'
 
 const extensionId =
@@ -57,10 +57,10 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
       }
 
       case 'store-css': {
-        const { themeId, css } = request
+        const { css } = request
 
         if (typeof css !== 'undefined') {
-          setLocalThemeData({ css, themeId })
+          setLocalThemeData({ css })
 
           response(request) // not used yet
         }
@@ -154,7 +154,7 @@ export async function getHost() {
   })
 }
 
-export function makeThemesAvailable(themes, responseFunc = null) {
+export function storeThemesInPage(themes, responseFunc = null) {
   // send it to the background
   sendMessageToRuntime({ type: 'set-themes', themes }, responseFunc)
 
@@ -176,7 +176,7 @@ function sendMessageToTab(
   if (browser) {
     getTabId((tabId) => {
       const themeId = window.EXTENSION_HOST
-        ? useHostStore.getState().getHostData().currentThemeId
+        ? useAppStore.getState().getHostData().currentThemeId
         : null
       browser?.tabs.sendMessage(
         tabId,
