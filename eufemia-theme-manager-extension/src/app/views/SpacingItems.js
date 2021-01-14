@@ -56,6 +56,12 @@ export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
 
   return (
     <List>
+      {spacings.length === 0 && (
+        <Item key="empty">
+          <ItemLayout>Noting found</ItemLayout>
+        </Item>
+      )}
+
       {spacings.map((params) => {
         const { key, value, name, change } = params
 

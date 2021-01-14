@@ -56,6 +56,12 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
 
   return (
     <List>
+      {colors.length === 0 && (
+        <Item key="empty">
+          <ItemLayout>Noting found</ItemLayout>
+        </Item>
+      )}
+
       {colors.map((params) => {
         const { key, value, name, change, useCustomColor } = params
         const contrastValue = change
