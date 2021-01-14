@@ -142,7 +142,7 @@ export function RemoveTheme(props) {
   const { removeTheme } = useThemeStore()
   const { getHostData, setSelectedThemeId } = useHostStore()
   const { selectedThemeId } = getHostData()
-  console.log('selectedThemeId', selectedThemeId)
+
   return ['dnb-ui', 'blue-test'].includes(selectedThemeId) ? null : (
     <StyledRemoveButton
       variant="tertiary"
