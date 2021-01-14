@@ -68,6 +68,18 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
         break
       }
 
+      case 'store-themes': {
+        const { themes } = request
+
+        if (typeof themes !== 'undefined') {
+          setLocalThemeData({ themes })
+
+          response(request) // not used yet
+        }
+
+        break
+      }
+
       default:
         return false
     }
@@ -109,7 +121,11 @@ export function getLocalThemeData() {
 }
 
 export function setLocalThemeData(data) {
-  window.localStorage?.setItem('eufemia-theme-content', JSON.stringify(data))
+  const localData = getLocalThemeData()
+  window.localStorage?.setItem(
+    'eufemia-theme-content',
+    JSON.stringify({ ...localData, ...data })
+  )
 }
 
 export function setLocalThemeCSS() {
@@ -119,7 +135,7 @@ export function setLocalThemeCSS() {
   }
 }
 
-export function hasLocalThemeData() {
+export function hasEnabledLocalThemeData() {
   const localData = getLocalThemeData()
   return Boolean(localData && localData.css)
 }
@@ -139,7 +155,11 @@ export async function getHost() {
 }
 
 export function makeThemesAvailable(themes, responseFunc = null) {
-  sendMessageToRuntime({ themes, type: 'set-themes' }, responseFunc)
+  // send it to the background
+  sendMessageToRuntime({ type: 'set-themes', themes }, responseFunc)
+
+  // send it to the content
+  sendMessageToTab({ type: 'store-themes', themes }, responseFunc)
 }
 
 function sendMessageToRuntime(

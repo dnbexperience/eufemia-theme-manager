@@ -170,7 +170,7 @@ function showOutline({ path }) {
   if (element) {
     element.scrollIntoView({
       behavior: 'smooth',
-      block: 'center',
+      block: 'start',
     })
   }
 }

@@ -1,9 +1,11 @@
 import { createThemeEditor, removeThemeEditor } from './editor/ExtensionEditor'
 import {
   listenForExtensionRequests,
-  hasLocalThemeData,
+  hasEnabledLocalThemeData,
   setLocalThemeCSS,
-  getThemesAsync,
+  // getThemesAsync,
+  getLocalThemeData,
+  setLocalThemeData,
 } from '../shared/Bridge'
 import {
   listenForModifications,
@@ -12,36 +14,56 @@ import {
   flushThemesHash,
 } from './editor/EditorStore'
 
+if (hasEnabledLocalThemeData()) {
+  if (hasEnabledLocalThemeData()) {
+    setTimeout(() => {
+      setLocalThemeModifications()
+    }, 1) // without this delay, zustand is removing our data!
+  }
+}
+
 listenForExtensionRequests({
   onResponse: (response) => {
-    if (response.type === 'store-css') {
-      getThemesAsync().then(({ themes }) => {
-        setLocalThemeModifications({ themes })
+    switch (response.type) {
+      case 'store-themes': {
+        const themes = response.themes
+        setLocalThemeData({ themes })
+
+        setLocalThemeModifications()
 
         if (response.themeId === 'blue-test' && response.css) {
           removeCustomModifications()
         }
-      })
+        break
+      }
+
+      default: {
+      }
     }
   },
 })
 
 let unsub
-function setLocalThemeModifications({ themes }) {
-  if (hasLocalThemeData()) {
+function setLocalThemeModifications() {
+  if (hasEnabledLocalThemeData()) {
     setLocalThemeCSS()
     createThemeEditor()
 
-    applyModifications({ themes })
-    flushThemesHash()
+    const themes = getLocalThemeData()?.themes
+    if (themes) {
+      applyModifications({ themes })
+      flushThemesHash()
+    }
 
     if (typeof unsub === 'undefined') {
       unsub = listenForModifications({
         onModification: () => {
+          const themes = getLocalThemeData()?.themes
+          applyModifications({ themes })
           // get fresh themes
-          getThemesAsync().then(({ themes }) => {
-            applyModifications({ themes })
-          })
+          // getThemesAsync().then(({ themes }) => {
+          //   applyModifications({ themes })
+          // })
         },
       })
     }
@@ -52,10 +74,4 @@ function setLocalThemeModifications({ themes }) {
     unsub()
     unsub = undefined
   }
-}
-
-if (hasLocalThemeData()) {
-  getThemesAsync().then(({ themes }) => {
-    setLocalThemeModifications({ themes })
-  })
 }

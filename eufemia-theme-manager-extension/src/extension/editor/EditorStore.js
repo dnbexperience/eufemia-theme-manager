@@ -48,6 +48,7 @@ export function listenForModifications({ onModification } = {}) {
 function getPersistConfig() {
   return {
     name: 'eufemia-theme-editor',
+    blacklist: ['themesHash'],
   }
 }
 
