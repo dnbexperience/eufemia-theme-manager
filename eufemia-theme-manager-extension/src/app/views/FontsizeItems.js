@@ -10,7 +10,6 @@ import {
   Dropdown,
   FormStatus,
   H3,
-  P,
 } from 'dnb-ui-lib'
 import { arrow_right } from 'dnb-ui-lib/icons'
 import { useTheme, useHostStore } from '../core/Store'
@@ -80,9 +79,7 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
                     {value}
                   </OriginalFontsize>
 
-                  <P>
-                    <Icon right="0.25rem" icon={arrow_right} />
-                  </P>
+                  <Icon right="0.25rem" icon={arrow_right} />
 
                   <NewFontsize aria-label={`New Fontsize ${value}`}>
                     {enabled ? (
