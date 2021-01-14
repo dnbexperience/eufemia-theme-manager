@@ -2,7 +2,6 @@ import React from 'react'
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import { P } from 'dnb-ui-lib/elements'
-import { ScrollView } from 'dnb-ui-lib/fragments'
 import { Tabs } from 'dnb-ui-lib/components'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
@@ -10,6 +9,7 @@ import { generateThemeIgnoreColors } from '../shared/ColorController'
 import Toolbar from './views/Toolbar'
 import ColorItems from './views/ColorItems'
 import SpacingItems from './views/SpacingItems'
+import FontsizeItems from './views/FontsizeItems'
 import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
 import { getHost } from '../shared/Bridge'
@@ -54,6 +54,7 @@ function TabsWithContent() {
         data={[
           { title: 'Colors', key: 'colors' },
           { title: 'Spacing', key: 'spacings' },
+          { title: 'Font Size', key: 'fontsizes' },
         ]}
         selected_key={selectedTab}
         on_change={({ selected_key }) => {
@@ -65,21 +66,19 @@ function TabsWithContent() {
           colors: (
             <>
               <ThemeFilter key="colors" cacheKey="colors" />
-              <ScrollView>
-                <ScrollViewInner>
-                  <ColorItems />
-                </ScrollViewInner>
-              </ScrollView>
+              <ColorItems />
             </>
           ),
           spacings: (
             <>
               <ThemeFilter key="spacing" cacheKey="spacing" />
-              <ScrollView>
-                <ScrollViewInner>
-                  <SpacingItems />
-                </ScrollViewInner>
-              </ScrollView>
+              <SpacingItems />
+            </>
+          ),
+          fontsizes: (
+            <>
+              <ThemeFilter key="fontsize" cacheKey="fontsize" />
+              <FontsizeItems />
             </>
           ),
         }}
@@ -130,12 +129,6 @@ const StyledTabs = styled(Tabs)`
   .dnb-tabs__content {
     margin-top: 0;
   }
-`
-
-const ScrollViewInner = styled.div`
-  min-height: var(--extension-height);
-  padding: 0 var(--spacing-x-small);
-  padding-bottom: 4rem;
 `
 
 const Main = styled.main`

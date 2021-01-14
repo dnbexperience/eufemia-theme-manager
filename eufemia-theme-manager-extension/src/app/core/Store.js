@@ -51,6 +51,7 @@ const themesStore = (set, get) => ({
     return {
       colorsList: [],
       spacingsList: [],
+      fontsizeList: [],
     }
   },
   getTheme: (themeId = null) => {
@@ -95,7 +96,11 @@ const themesStore = (set, get) => ({
 
         default: {
           const theme = getState()
-          return [...(theme?.colorsList || []), ...(theme?.spacingsList || [])]
+          return [
+            ...(theme?.colorsList || []),
+            ...(theme?.spacingsList || []),
+            ...(theme?.fontsizesList || []),
+          ]
         }
       }
     }
@@ -179,6 +184,45 @@ const themesStore = (set, get) => ({
       }
     }
 
+    // Font-size utils
+    const changeFontsize = (origKey, object) => {
+      const theme = getState()
+      let found
+
+      const fontsizesList = (theme?.fontsizesList || []).map((item) => {
+        if (item.key === origKey) {
+          found = item = { ...item, ...object }
+        }
+        return item
+      })
+
+      if (!found) {
+        fontsizesList.push(Object.assign(object))
+      }
+
+      setState({ fontsizesList })
+    }
+    const setFontsize = (origKey, change, fallbackParams = {}) => {
+      changeFontsize(
+        origKey,
+        Object.assign(fallbackParams, {
+          change,
+        })
+      )
+    }
+    const resetFontsize = (rmKey) => {
+      changeFontsize(rmKey, {
+        change: null,
+      })
+    }
+    const useFontsizeTools = () => {
+      return {
+        changeFontsize,
+        setFontsize,
+        resetFontsize,
+      }
+    }
+
     return {
       themeId,
       ...getState(),
@@ -187,6 +231,7 @@ const themesStore = (set, get) => ({
       getThemeChanges,
       useColorTools,
       useSpacingTools,
+      useFontsizeTools,
     }
   },
 })
