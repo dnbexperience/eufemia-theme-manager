@@ -6,6 +6,8 @@ import { Tabs } from 'dnb-ui-lib/components'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
 import { generateThemeIgnoreColors } from '../shared/ColorController'
+import { generateThemeIgnoreSpacings } from '../shared/SpacingController'
+import { generateThemeIgnoreFontsizes } from '../shared/FontsizeController'
 import Toolbar from './views/Toolbar'
 import ColorItems from './views/ColorItems'
 import SpacingItems from './views/SpacingItems'
@@ -18,13 +20,13 @@ import { useHostStore } from './core/Store'
 
 export default function App() {
   return (
-    <ColorThemeIgnore>
+    <ThemeIgnore>
       <GlobalStyles />
 
       <React.Suspense fallback={<Indicator />}>
         <Content />
       </React.Suspense>
-    </ColorThemeIgnore>
+    </ThemeIgnore>
   )
 }
 
@@ -88,9 +90,14 @@ function TabsWithContent() {
 }
 
 function GlobalStyles() {
-  const [dnbColorThemeIgnore__willBeReplaced] = React.useState(() =>
-    generateThemeIgnoreColors()
-  )
+  const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
+    console.log('hello')
+    return [
+      generateThemeIgnoreColors(),
+      generateThemeIgnoreSpacings(),
+      generateThemeIgnoreFontsizes(),
+    ].join('')
+  })
 
   return (
     <Global
@@ -110,8 +117,8 @@ function GlobalStyles() {
           overscroll-behavior-x: none;
         }
 
-        .dnb-color-theme-ignore__willBeReplaced {
-          ${dnbColorThemeIgnore__willBeReplaced}
+        .dnb-theme-ignore__willBeReplaced {
+          ${dnbThemeIgnore__willBeReplaced}
         }
       `}
     />
@@ -153,8 +160,6 @@ function Indicator() {
   )
 }
 
-function ColorThemeIgnore({ children }) {
-  return (
-    <div className="dnb-color-theme-ignore__willBeReplaced">{children}</div>
-  )
+function ThemeIgnore({ children }) {
+  return <div className="dnb-theme-ignore__willBeReplaced">{children}</div>
 }
