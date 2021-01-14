@@ -53,7 +53,7 @@ function TabsWithContent() {
       <StyledTabs
         data={[
           { title: 'Colors', key: 'colors' },
-          { title: 'Spacing', key: 'spacing' },
+          { title: 'Spacing', key: 'spacings' },
         ]}
         selected_key={selectedTab}
         on_change={({ selected_key }) => {
@@ -72,7 +72,7 @@ function TabsWithContent() {
               </ScrollView>
             </>
           ),
-          spacing: (
+          spacings: (
             <>
               <ThemeFilter key="spacing" cacheKey="spacing" />
               <ScrollView>
