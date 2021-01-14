@@ -3,7 +3,7 @@ import {
   listenForExtensionRequests,
   hasEnabledLocalThemeData,
   setLocalThemeCSS,
-  // getThemesAsync,
+  getThemesAsync,
   getLocalThemeData,
   setLocalThemeData,
 } from '../shared/Bridge'
@@ -15,11 +15,19 @@ import {
 } from './editor/EditorStore'
 
 if (hasEnabledLocalThemeData()) {
-  if (hasEnabledLocalThemeData()) {
-    setTimeout(() => {
-      setLocalThemeModifications()
-    }, 1) // without this delay, zustand is removing our data!
-  }
+  setLocalThemeModifications()
+
+  // or, get fresh themes, in case a data has changed
+  getThemesAsync().then(({ themes }) => {
+    setLocalThemeData({ themes })
+    setLocalThemeModifications()
+  })
+
+  // const store = JSON.parse(
+  //   window.localStorage.getItem('eufemia-theme-editor') || '{}'
+  // )
+  // if (store?.state?.enabled) {
+  // }
 }
 
 listenForExtensionRequests({
@@ -28,8 +36,8 @@ listenForExtensionRequests({
       case 'store-themes': {
         const themes = response.themes
         setLocalThemeData({ themes })
-
         setLocalThemeModifications()
+        flushThemesHash()
 
         if (response.themeId === 'blue-test' && response.css) {
           removeCustomModifications()
@@ -52,7 +60,6 @@ function setLocalThemeModifications() {
     const themes = getLocalThemeData()?.themes
     if (themes) {
       applyModifications({ themes })
-      flushThemesHash()
     }
 
     if (typeof unsub === 'undefined') {
