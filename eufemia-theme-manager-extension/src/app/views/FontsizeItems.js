@@ -168,7 +168,7 @@ const NewFontsize = styled(OriginalFontsize)`
   }
 `
 const List = styled.ul`
-  padding: 0;
+  padding: 0 var(--spacing-small);
   list-style: none;
 `
 const Item = styled.li`
