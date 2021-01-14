@@ -1,6 +1,6 @@
 {
   "name": "eufemia-theme-manager-extension",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "test": "react-app-rewired test",
