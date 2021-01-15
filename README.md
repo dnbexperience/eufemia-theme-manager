@@ -5,6 +5,14 @@ This is a browser extension to help creating [Eufemia Design System](https://euf
 It can target any output, using the `dnb-ui-lib` with all their CSS vars, like `--color-black` etc.\
 The target can then get manipulated in various ways.
 
+## State of art
+
+Most of the code written in that extension, is created during Christmas break evenings, so no optimization of state management and exiting integration tests got written. Contribution welcome!
+
+## Mono-repo
+
+As of now, only one package is in this mono-repo, so you may have to cd into `/eufemia-theme-manager-extension/`.
+
 ## Local development
 
 1. Build the extension with e.g.: `yarn build:chrome`,
