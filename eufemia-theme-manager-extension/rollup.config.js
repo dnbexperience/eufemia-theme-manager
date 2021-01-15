@@ -4,12 +4,11 @@ import commonjs from '@rollup/plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'
 // import { terser } from 'rollup-plugin-terser'
-// import dotenv from 'dotenv'
-// dotenv.config()
+import dotenv from 'dotenv'
+dotenv.config()
 
 const browser = process.env.REACT_APP_BROWSER
-console.log('browser', browser)
-// const production = !process.env.ROLLUP_WATCH
+// const production = !(process.env.ROLLUP_WATCH && process.env.NODE_ENV === 'production')
 
 if (typeof process !== 'undefined') {
   process.env.NODE_ENV = 'production'
@@ -29,6 +28,11 @@ const basisConfig = {
     nodeGlobals(),
     replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
     replace({ 'process.env.REACT_APP_BROWSER': JSON.stringify(browser) }),
+    replace({
+      'process.env.REACT_APP_EXTENSION_DEV_WATCH': JSON.stringify(
+        process.env.REACT_APP_EXTENSION_DEV_WATCH
+      ),
+    }),
     // production &&
     // terser(), // minify, but only in production
   ],

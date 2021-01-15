@@ -32,15 +32,17 @@ const watchChanges = (dir, lastTimestamp) => {
   })
 }
 
-browser?.management?.getSelf((self) => {
-  if (self.installType === 'development') {
-    if (typeof browser?.runtime?.getPackageDirectoryEntry === 'function') {
-      browser.runtime.getPackageDirectoryEntry((dir) => watchChanges(dir))
-    }
-    browser?.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-      if (tabs[0]) {
-        browser?.tabs.reload(tabs[0].id)
+if (process.env.REACT_APP_EXTENSION_DEV_WATCH) {
+  browser?.management?.getSelf((self) => {
+    if (self.installType === 'development') {
+      if (typeof browser?.runtime?.getPackageDirectoryEntry === 'function') {
+        browser.runtime.getPackageDirectoryEntry((dir) => watchChanges(dir))
       }
-    })
-  }
-})
+      browser?.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+        if (tabs[0]) {
+          browser?.tabs.reload(tabs[0].id)
+        }
+      })
+    }
+  })
+}
