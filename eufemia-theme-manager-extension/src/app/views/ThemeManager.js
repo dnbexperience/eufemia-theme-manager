@@ -18,7 +18,7 @@ export default function ThemeManager(props) {
   const { selectedThemeId } = getHostData()
   const themesList = Object.entries(getThemes())
     .map(([key]) => key)
-    .filter((key) => !['dnb-ui', 'blue-test'].includes(key))
+    .filter((key) => !['dnb-ui', 'blue-test', '2x-test'].includes(key))
   const [showInput, changeCreateInput] = React.useState(false)
   const [toggleCreateInput] = React.useState(() => () =>
     changeCreateInput((s) => !s)
@@ -143,7 +143,7 @@ export function RemoveTheme(props) {
   const { getHostData, setSelectedThemeId } = useAppStore()
   const { selectedThemeId } = getHostData()
 
-  return ['dnb-ui', 'blue-test'].includes(selectedThemeId) ? null : (
+  return ['dnb-ui', 'blue-test', '2x-test'].includes(selectedThemeId) ? null : (
     <StyledRemoveButton
       variant="tertiary"
       text={`Delete "${selectedThemeId}"`}

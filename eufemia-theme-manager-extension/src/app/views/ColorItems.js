@@ -36,7 +36,7 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
   const { colorsList, useColorTools } = useTheme(selectedThemeId)
   const { setColor, resetColor, changeColor } = useColorTools()
 
-  if (['dnb-ui', 'blue-test'].includes(selectedThemeId)) {
+  if (['dnb-ui', 'blue-test', '2x-test'].includes(selectedThemeId)) {
     return (
       <>
         <Hr fullscreen top="1rem" />

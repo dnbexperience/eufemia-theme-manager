@@ -52,7 +52,14 @@ export default class Compiler {
   }
   compileList(listWithChanges) {
     const declarations = this.buildDeclarations(listWithChanges)
-    return this.combineWithRoot(declarations)
+
+    const css = listWithChanges
+      .filter((cur) => cur.css)
+      .map(({ css }) => css)
+      .join('')
+    console.log('declarations', css, declarations)
+
+    return css + this.combineWithRoot(declarations)
   }
   setCSS(css, elementId = 'eufemia-theme') {
     const hash = String(css) + String(elementId)

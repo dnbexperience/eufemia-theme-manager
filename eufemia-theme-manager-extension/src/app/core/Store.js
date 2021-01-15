@@ -31,8 +31,15 @@ function themesStore(set, get) {
 
       if (!themes['dnb-ui']) {
         themes['dnb-ui'] = getThemeConstructs()
-        themes['blue-test'] = getThemeConstructs()
         themes['demo'] = getThemeConstructs()
+      }
+
+      if (!themes['blue-test']) {
+        themes['blue-test'] = getThemeConstructs()
+      }
+
+      if (!themes['2x-test']) {
+        themes['2x-test'] = getThemeConstructs()
       }
 
       return themes
@@ -105,6 +112,14 @@ function themesStore(set, get) {
                 key,
                 change: 'blue',
               })),
+            ]
+          }
+
+          case '2x-test': {
+            return [
+              {
+                css: 'html{font-size: 200%;}',
+              },
             ]
           }
 

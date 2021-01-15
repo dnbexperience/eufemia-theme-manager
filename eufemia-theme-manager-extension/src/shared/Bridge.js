@@ -81,12 +81,15 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
       }
 
       default:
+        // response(request) // not used yet
         return false
     }
 
     if (typeof onResponse === 'function') {
       onResponse(request)
     }
+
+    // response(request) // not used yet
 
     return true
   })

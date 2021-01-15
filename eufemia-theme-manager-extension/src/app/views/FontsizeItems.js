@@ -35,7 +35,7 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
   const { fontsizesList, useFontsizeTools } = useTheme(selectedThemeId)
   const { setFontsize, resetFontsize } = useFontsizeTools()
 
-  if (['dnb-ui', 'blue-test'].includes(selectedThemeId)) {
+  if (['dnb-ui', 'blue-test', '2x-test'].includes(selectedThemeId)) {
     return (
       <>
         <Hr fullscreen top="1rem" />
