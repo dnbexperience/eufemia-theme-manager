@@ -184,7 +184,7 @@ function useThemes(themesHash) {
         setListOfThemes(
           Object.keys(themes)
             .map((key) => key)
-            .filter((key) => !['blue-test'].includes(key))
+            .filter((key) => !['blue-test', '2x-test'].includes(key))
         )
       })
       .catch((e) => {

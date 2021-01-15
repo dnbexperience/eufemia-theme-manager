@@ -35,7 +35,7 @@ export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
   const { spacingsList, useSpacingTools } = useTheme(selectedThemeId)
   const { setSpacing, resetSpacing } = useSpacingTools()
 
-  if (['dnb-ui', 'blue-test'].includes(selectedThemeId)) {
+  if (['dnb-ui', 'blue-test', '2x-test'].includes(selectedThemeId)) {
     return (
       <>
         <Hr fullscreen top="1rem" />
