@@ -55,12 +55,13 @@ let unsub
 function setLocalThemeModifications() {
   if (hasEnabledLocalThemeData()) {
     setLocalThemeCSS()
-    createThemeEditor()
 
     const themes = getLocalThemeData()?.themes
     if (themes) {
       applyModifications({ themes })
     }
+
+    createThemeEditor()
 
     if (typeof unsub === 'undefined') {
       unsub = listenForModifications({
