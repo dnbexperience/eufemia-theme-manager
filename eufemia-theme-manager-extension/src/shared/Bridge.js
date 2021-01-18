@@ -187,7 +187,7 @@ function sendMessageToTab(
         responseFunc
       )
     })
-  } else {
+  } else if (responseFunc) {
     responseFunc('localhost')
   }
 }
