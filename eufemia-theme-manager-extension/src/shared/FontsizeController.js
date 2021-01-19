@@ -39,6 +39,7 @@ export function getOriginalFontsizesAsObject() {
     .filter(([name]) => name.includes('--font-size-'))
     .reduce((acc, [key, value]) => {
       acc[key] = value
+      if (key.includes('--em')) delete acc[key]
       return acc
     }, {})
 
