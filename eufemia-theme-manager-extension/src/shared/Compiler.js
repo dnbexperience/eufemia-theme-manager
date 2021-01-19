@@ -57,7 +57,6 @@ export default class Compiler {
       .filter((cur) => cur.css)
       .map(({ css }) => css)
       .join('')
-    console.log('declarations', css, declarations)
 
     return css + this.combineWithRoot(declarations)
   }
