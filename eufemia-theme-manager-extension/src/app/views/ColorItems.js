@@ -56,7 +56,7 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
     <List>
       {colors.length === 0 && (
         <Item key="empty">
-          <ItemLayout>Noting found</ItemLayout>
+          <ItemLayout>Noting found 🤷‍♂️</ItemLayout>
         </Item>
       )}
 

@@ -56,7 +56,7 @@ export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
     <List>
       {spacings.length === 0 && (
         <Item key="empty">
-          <ItemLayout>Noting found</ItemLayout>
+          <ItemLayout>Noting found 🤷‍♂️</ItemLayout>
         </Item>
       )}
 

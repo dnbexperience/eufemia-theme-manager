@@ -57,7 +57,7 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
     <List>
       {fontsizes.length === 0 && (
         <Item key="empty">
-          <ItemLayout>Noting found</ItemLayout>
+          <ItemLayout>Noting found 🤷‍♂️</ItemLayout>
         </Item>
       )}
 
