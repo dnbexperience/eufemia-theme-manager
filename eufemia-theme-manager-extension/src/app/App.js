@@ -12,6 +12,7 @@ import Toolbar from './views/Toolbar'
 import ColorItems from './views/ColorItems'
 import SpacingItems from './views/SpacingItems'
 import FontsizeItems from './views/FontsizeItems'
+import RootFontSizeChanger from './views/RootFontSizeChanger'
 import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
 import { getHost } from '../shared/Bridge'
@@ -57,6 +58,7 @@ function TabsWithContent() {
           { title: 'Colors', key: 'colors' },
           { title: 'Spacing', key: 'spacings' },
           { title: 'Font Size', key: 'fontsizes' },
+          { title: 'Root Size', key: 'rootfontsize' },
         ]}
         selected_key={selectedTab}
         on_change={({ selected_key }) => {
@@ -83,12 +85,17 @@ function TabsWithContent() {
               <FontsizeItems />
             </>
           ),
+          rootfontsize: <RootFontSizeChanger />,
         }}
       </StyledTabs>
     </Main>
   )
 }
 
+const isDev =
+  process.env.NODE_ENV === 'development' &&
+  process.env.REACT_APP_EXTENSION_DEV_LOCALHOST &&
+  String(window.location.host).includes('localhost')
 function GlobalStyles() {
   const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
     return [
@@ -105,6 +112,8 @@ function GlobalStyles() {
           --extension-width: 40rem; /* max 800px (50rem) */
           --extension-height: 37rem; /* max 600px */
         }
+
+        ${isDev ? 'html{ font-size: 100% !important; }' : ''}
 
         body {
           overflow-y: scroll;
