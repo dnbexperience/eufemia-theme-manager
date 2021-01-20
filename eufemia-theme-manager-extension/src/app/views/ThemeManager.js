@@ -8,7 +8,7 @@ import {
   FormSet,
   FormRow,
   Dropdown,
-} from 'dnb-ui-lib'
+} from 'dnb-ui-lib/components'
 import { exclamation_circled } from 'dnb-ui-lib/icons'
 import { useThemeStore, useAppStore } from '../core/Store'
 

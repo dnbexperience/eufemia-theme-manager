@@ -9,12 +9,10 @@ import {
   FormRow,
   Button,
   Icon,
-  Hr,
   Number,
   FormStatus,
-  H3,
-  P,
-} from 'dnb-ui-lib'
+} from 'dnb-ui-lib/components'
+import { H3, P, Hr } from 'dnb-ui-lib/elements'
 import { arrow_right } from 'dnb-ui-lib/icons'
 import { useTheme, useAppStore } from '../core/Store'
 import {

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { H1 } from 'dnb-ui-lib'
+import { H1 } from 'dnb-ui-lib/elements'
 import ThemeSelector from './ThemeSelector'
 
 export default function Header() {

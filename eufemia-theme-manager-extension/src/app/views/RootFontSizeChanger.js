@@ -5,11 +5,10 @@ import {
   FormRow,
   Button,
   Icon,
-  Hr,
   Slider,
   FormStatus,
-  H3,
-} from 'dnb-ui-lib'
+} from 'dnb-ui-lib/components'
+import { H3, Hr } from 'dnb-ui-lib/elements'
 import { arrow_right } from 'dnb-ui-lib/icons'
 import { useTheme, useAppStore } from '../core/Store'
 import { useScrollPosition } from '../hooks/Window'

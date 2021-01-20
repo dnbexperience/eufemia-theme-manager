@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Dropdown, Switch } from 'dnb-ui-lib'
+import { Dropdown, Switch, FormRow } from 'dnb-ui-lib/components'
 import { useThemeStore, useAppStore } from '../core/Store'
-import { FormRow } from 'dnb-ui-lib'
 
 export default function ThemeSelector(props) {
   return (

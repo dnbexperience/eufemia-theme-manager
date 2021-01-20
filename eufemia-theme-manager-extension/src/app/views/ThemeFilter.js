@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Input, Switch } from 'dnb-ui-lib'
+import { Input, Switch, FormRow } from 'dnb-ui-lib/components'
 import { useAppStore } from '../core/Store'
-import { FormRow } from 'dnb-ui-lib'
 
 export default function ThemeFilter({ cacheKey, ...props }) {
   return (
