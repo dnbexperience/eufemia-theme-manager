@@ -158,6 +158,7 @@ const StyledTabs = styled(Tabs)`
   }
   .dnb-tabs__content {
     margin-top: 0;
+    margin-bottom: 5rem;
   }
 `
 
