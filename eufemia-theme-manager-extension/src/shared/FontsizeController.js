@@ -11,16 +11,23 @@ export function fillRemaningFontsizes(
   const notInList = (customFontsizesList || []).filter(
     ({ key }) => !keyRef[key]
   )
-  // .map((item) => ({ ...item, enabled: false }))
 
-  return originalFontsizesList
-    .map((item) => ({
-      ...item,
-      // enabled: false,
-      ...(customFontsizesList || []).find(({ key }) => key === item.key),
-    }))
-    .concat(notInList)
-    .filter(({ key }) => key) // should have a key
+  if (
+    !(customFontsizesList?.findIndex(({ key }) => key === 'font-size') > -1)
+  ) {
+    originalFontsizesList = [
+      { key: 'font-size', name: 'Set font-size', value: null, change: null },
+    ].concat(originalFontsizesList)
+  }
+
+  return notInList.concat(
+    originalFontsizesList
+      .map((item) => ({
+        ...item,
+        ...(customFontsizesList || []).find(({ key }) => key === item.key),
+      }))
+      .filter(({ key }) => key) // should have a key
+  )
 }
 
 export function getOriginalFontsizesAsArray() {

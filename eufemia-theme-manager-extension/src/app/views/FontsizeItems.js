@@ -7,6 +7,7 @@ import {
   Button,
   Icon,
   Dropdown,
+  Slider,
   FormStatus,
 } from 'dnb-ui-lib/components'
 import { H3, Hr } from 'dnb-ui-lib/elements'
@@ -75,7 +76,7 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
 
                 <FontsizeAreaHorizontal>
                   <OriginalFontsize aria-label={`Original Fontsize ${value}`}>
-                    {value}
+                    {value || (key === 'font-size' ? '16px' : '')}
                   </OriginalFontsize>
 
                   <Icon right="0.25rem" icon={arrow_right} />
@@ -95,18 +96,33 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
 
               <FormRow direction="vertical">
                 <SimpleFontsizePicker>
-                  <StyledDropdown
-                    title="Choose a font-size"
-                    // label="Theme to Edit:"
-                    skip_portal
-                    value={originalPickerFontsizesWithTitle.findIndex(
-                      ({ value }) => value === change
-                    )}
-                    data={originalPickerFontsizesWithTitle}
-                    on_change={({ data: { value } }) => {
-                      setFontsize(key, value, params)
-                    }}
-                  />
+                  {key === 'font-size' ? (
+                    <Slider
+                      stretch
+                      min={8}
+                      max={64}
+                      step={1}
+                      value={parseFloat(change) || 16}
+                      title="Set custom font-size"
+                      onDoubleClick={() => resetFontsize(key)}
+                      on_change={({ value }) => {
+                        setFontsize(key, `${value}px`, params)
+                      }}
+                    />
+                  ) : (
+                    <StyledDropdown
+                      title="Choose a font-size"
+                      // label="Theme to Edit:"
+                      skip_portal
+                      value={originalPickerFontsizesWithTitle.findIndex(
+                        ({ value }) => value === change
+                      )}
+                      data={originalPickerFontsizesWithTitle}
+                      on_change={({ data: { value } }) => {
+                        setFontsize(key, value, params)
+                      }}
+                    />
+                  )}
                 </SimpleFontsizePicker>
 
                 <FormRow top="0.5rem" centered direction="horizontal">
