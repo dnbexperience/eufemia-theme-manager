@@ -5,12 +5,10 @@ import { useAppStore } from '../core/Store'
 
 export default function ThemeFilter({ cacheKey, ...props }) {
   return (
-    <ThemeFilterArea>
-      <FormRow {...props}>
-        <SearchInput cacheKey={cacheKey} right="1rem" />
-        <ToggleActive cacheKey={cacheKey} right="1rem" />
-      </FormRow>
-    </ThemeFilterArea>
+    <FormRowArea {...props}>
+      <SearchInput cacheKey={cacheKey} right="1rem" />
+      <ToggleActive cacheKey={cacheKey} right="1rem" />
+    </FormRowArea>
   )
 }
 
@@ -37,18 +35,9 @@ function SearchInput({ cacheKey, ...props }) {
   )
 }
 
-const ThemeFilterArea = styled.div`
-  position: sticky;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  right: 0;
-
+const FormRowArea = styled(FormRow)`
   padding: 1rem;
-
   background: var(--color-white);
-  border-bottom: 1px solid var(--color-black-8);
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
 `
 
 function ToggleActive({ cacheKey, ...props }) {

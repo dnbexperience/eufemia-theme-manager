@@ -17,6 +17,8 @@ export const useWindowStore = create(
   persist(hostStore, getPersistConfig('eufemia-theme-window'))
 )
 
+export const useErrorStore = create(errorStore)
+
 export function useTheme(themeId) {
   const { getTheme } = useThemeStore()
   return getTheme(themeId)
@@ -322,6 +324,19 @@ function hostStore(set, get) {
   }
 }
 
+function errorStore(set) {
+  return {
+    error: null,
+    setError: (error) => {
+      console.warn(error)
+      set({ error })
+    },
+    hideError: () => {
+      set({ error: null })
+    },
+  }
+}
+
 // function postRehydrationMiddleware() {
 //   const theme = useTheme.getState().getTheme()
 //   ...
@@ -343,11 +358,17 @@ function getPersistConfig(name) {
           if (useBrowserStorage && browser && browser.storage !== 'undefined') {
             try {
               browser.storage?.sync.get([name], ({ [name]: themeData }) => {
-                // const themeData = data?.themeData || data || '{}'
-                resolve(themeData)
+                if (browser.runtime.lastError) {
+                  useErrorStore
+                    .getState()
+                    .setError(browser.runtime.lastError.message)
+                } else {
+                  // const themeData = data?.themeData || data || '{}'
+                  resolve(themeData)
+                }
               })
             } catch (e) {
-              console.warn(e)
+              useErrorStore.getState().setError(e.message)
               resolve(window.localStorage?.getItem(name) || '{}')
             }
           } else {
@@ -359,10 +380,16 @@ function getPersistConfig(name) {
         if (useBrowserStorage && browser && browser.storage !== 'undefined') {
           try {
             browser.storage?.sync.set({ [name]: themeData }, () => {
-              // console.log('setItem:', name, themeData)
+              // cgonsole.lo('setItem:', name, themeData)
+              if (browser.runtime.lastError) {
+                useErrorStore
+                  .getState()
+                  .setError(browser.runtime.lastError.message)
+              }
             })
           } catch (e) {
-            console.warn(e)
+            useErrorStore.getState().setError(e.message)
+
             window.localStorage?.setItem(name, themeData)
           }
         } else {

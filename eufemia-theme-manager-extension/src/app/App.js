@@ -12,6 +12,7 @@ import Toolbar from './views/Toolbar'
 import ColorItems from './views/ColorItems'
 import SpacingItems from './views/SpacingItems'
 import FontsizeItems from './views/FontsizeItems'
+import ExtensionError from './views/ExtensionError'
 import RootFontSizeChanger from './views/RootFontSizeChanger'
 import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
@@ -54,6 +55,10 @@ function TabsWithContent() {
 
   return (
     <Main>
+      <StickyArea>
+        <ExtensionError />
+      </StickyArea>
+
       <StyledTabs
         data={[
           { title: 'Colors', key: 'colors' },
@@ -70,19 +75,25 @@ function TabsWithContent() {
         {{
           colors: (
             <>
-              <ThemeFilter key="colors" cacheKey="colors" />
+              <StickyFilterArea>
+                <ThemeFilter key="colors" cacheKey="colors" />
+              </StickyFilterArea>
               <ColorItems />
             </>
           ),
           spacings: (
             <>
-              <ThemeFilter key="spacing" cacheKey="spacing" />
+              <StickyFilterArea>
+                <ThemeFilter key="spacing" cacheKey="spacing" />
+              </StickyFilterArea>
               <SpacingItems />
             </>
           ),
           fontsizes: (
             <>
-              <ThemeFilter key="fontsize" cacheKey="fontsize" />
+              <StickyFilterArea>
+                <ThemeFilter key="fontsize" cacheKey="fontsize" />
+              </StickyFilterArea>
               <FontsizeItems />
             </>
           ),
@@ -92,6 +103,21 @@ function TabsWithContent() {
     </Main>
   )
 }
+
+const StickyArea = styled.div`
+  position: sticky;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  border-bottom: 1px solid var(--color-black-8);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
+`
+
+const StickyFilterArea = styled(StickyArea)`
+  z-index: 10;
+`
 
 function GlobalStyles() {
   const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
