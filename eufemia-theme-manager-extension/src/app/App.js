@@ -13,7 +13,6 @@ import ColorItems from './views/ColorItems'
 import SpacingItems from './views/SpacingItems'
 import FontsizeItems from './views/FontsizeItems'
 import ExtensionError from './views/ExtensionError'
-import RootFontSizeChanger from './views/RootFontSizeChanger'
 import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
 import { getHost } from '../shared/Bridge'
@@ -64,7 +63,6 @@ function TabsWithContent() {
           { title: 'Colors', key: 'colors' },
           { title: 'Spacing', key: 'spacings' },
           { title: 'Font Size', key: 'fontsizes' },
-          { title: 'Root Size', key: 'rootfontsize' },
         ]}
         selected_key={selectedTab}
         on_change={({ selected_key }) => {
@@ -97,7 +95,6 @@ function TabsWithContent() {
               <FontsizeItems />
             </>
           ),
-          rootfontsize: <RootFontSizeChanger />,
         }}
       </StyledTabs>
     </Main>

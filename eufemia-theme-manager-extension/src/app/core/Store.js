@@ -241,13 +241,6 @@ function themesStore(set, get) {
           })
         )
       }
-      const setRootFontsize = (value) => {
-        changeFontsize('root-font-size', {
-          key: 'root-font-size',
-          value,
-          css: value ? `html{font-size: ${value / 16}em;}` : '',
-        })
-      }
       const resetFontsize = (rmKey) => {
         changeFontsize(rmKey, {
           change: null,
@@ -256,7 +249,6 @@ function themesStore(set, get) {
       const useFontsizeTools = () => {
         return {
           changeFontsize,
-          setRootFontsize,
           setFontsize,
           resetFontsize,
         }
