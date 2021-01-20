@@ -6,16 +6,15 @@ export const originalColorsAsArray = getOriginalColorsAsArray()
 export function fillRemaningColors(originalColorsList, customColorsList) {
   const keyRef = originalColorsAsObject
   const notInList = (customColorsList || []).filter(({ key }) => !keyRef[key])
-  // .map((item) => ({ ...item, enabled: false }))
 
-  return originalColorsList
-    .map((item) => ({
-      ...item,
-      // enabled: false,
-      ...(customColorsList || []).find(({ key }) => key === item.key),
-    }))
-    .concat(notInList)
-    .filter(({ key }) => key) // should have a key
+  return notInList.concat(
+    originalColorsList
+      .map((item) => ({
+        ...item,
+        ...(customColorsList || []).find(({ key }) => key === item.key),
+      }))
+      .filter(({ key }) => key) // should have a key
+  )
 }
 
 export function getOriginalColorsAsArray() {

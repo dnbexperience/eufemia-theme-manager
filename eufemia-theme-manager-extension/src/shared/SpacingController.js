@@ -6,16 +6,15 @@ export const originalSpacingsAsArray = getOriginalSpacingsAsArray()
 export function fillRemaningSpacings(originalSpacingsList, customSpacingsList) {
   const keyRef = originalSpacingsAsObject
   const notInList = (customSpacingsList || []).filter(({ key }) => !keyRef[key])
-  // .map((item) => ({ ...item, enabled: false }))
 
-  return originalSpacingsList
-    .map((item) => ({
-      ...item,
-      // enabled: false,
-      ...(customSpacingsList || []).find(({ key }) => key === item.key),
-    }))
-    .concat(notInList)
-    .filter(({ key }) => key) // should have a key
+  return notInList.concat(
+    originalSpacingsList
+      .map((item) => ({
+        ...item,
+        ...(customSpacingsList || []).find(({ key }) => key === item.key),
+      }))
+      .filter(({ key }) => key) // should have a key
+  )
 }
 
 export function getOriginalSpacingsAsArray() {
