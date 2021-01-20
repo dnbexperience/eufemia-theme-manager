@@ -343,6 +343,7 @@ function errorStore(set) {
 // }
 
 function getPersistConfig(name) {
+  let writeTimeoutId
   const useBrowserStorage = true
   return {
     name,
@@ -378,19 +379,36 @@ function getPersistConfig(name) {
       },
       setItem: (name, themeData) => {
         if (useBrowserStorage && browser && browser.storage !== 'undefined') {
-          try {
-            browser.storage?.sync.set({ [name]: themeData }, () => {
-              // cgonsole.lo('setItem:', name, themeData)
-              if (browser.runtime.lastError) {
-                useErrorStore
-                  .getState()
-                  .setError(browser.runtime.lastError.message)
-              }
-            })
-          } catch (e) {
-            useErrorStore.getState().setError(e.message)
+          /**
+           * Because of the message: setError This request exceeds the MAX_WRITE_OPERATIONS_PER_MINUTE quota.
+           * we do debounce the write
+           */
 
-            window.localStorage?.setItem(name, themeData)
+          const write = () => {
+            try {
+              browser.storage?.sync.set({ [name]: themeData }, () => {
+                // console.lo('setItem:', name, themeData)
+                if (browser.runtime.lastError) {
+                  useErrorStore
+                    .getState()
+                    .setError(browser.runtime.lastError.message)
+                }
+              })
+            } catch (e) {
+              useErrorStore.getState().setError(e.message)
+
+              window.localStorage?.setItem(name, themeData)
+            }
+          }
+
+          if (!writeTimeoutId) {
+            writeTimeoutId = 1
+            write()
+          } else {
+            clearTimeout(writeTimeoutId)
+            writeTimeoutId = setTimeout(() => {
+              write()
+            }, 1e3)
           }
         } else {
           window.localStorage?.setItem(name, themeData)
