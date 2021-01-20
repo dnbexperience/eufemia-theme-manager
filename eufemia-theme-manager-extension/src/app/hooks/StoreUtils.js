@@ -1,13 +1,10 @@
 import React from 'react'
+import { isDev } from '../../shared/Browser'
 
 export function useRehydrationMiddleware() {
   React.useEffect(() => {
     // For dev only
-    if (
-      process.env.NODE_ENV === 'development' &&
-      process.env.REACT_APP_EXTENSION_DEV_LOCALHOST &&
-      String(window.location.host).includes('localhost')
-    ) {
+    if (isDev) {
       import('../../extension/content')
       // import('../extension/background')
     }

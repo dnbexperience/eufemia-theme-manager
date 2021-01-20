@@ -16,6 +16,7 @@ import RootFontSizeChanger from './views/RootFontSizeChanger'
 import { useRehydrationMiddleware } from './hooks/StoreUtils'
 import { useCompilerListener } from '../shared/Compiler'
 import { getHost } from '../shared/Bridge'
+import { isDev } from '../shared/Browser'
 import { waitForPromise } from './core/Utils'
 import { useAppStore } from './core/Store'
 
@@ -92,10 +93,6 @@ function TabsWithContent() {
   )
 }
 
-const isDev =
-  process.env.NODE_ENV === 'development' &&
-  process.env.REACT_APP_EXTENSION_DEV_LOCALHOST &&
-  String(window.location.host).includes('localhost')
 function GlobalStyles() {
   const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
     return [

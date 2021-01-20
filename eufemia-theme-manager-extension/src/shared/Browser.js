@@ -1,12 +1,12 @@
 let useBrowser = undefined
 
-if (
-  !(
-    process.env.NODE_ENV === 'development' &&
-    process.env.REACT_APP_EXTENSION_DEV_LOCALHOST &&
-    String(window.location.host).includes('localhost')
-  )
-) {
+export const isDev =
+  process.env.NODE_ENV === 'development' &&
+  process.env.REACT_APP_EXTENSION_DEV_LOCALHOST
+//  &&
+// String(window.location.host).includes('localhost')
+
+if (!isDev) {
   if (process.env.REACT_APP_BROWSER === 'chrome') {
     useBrowser = window.chrome
   } else {

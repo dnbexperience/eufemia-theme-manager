@@ -38,12 +38,6 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
         break
       }
 
-      case 'get-host': {
-        response(window.location.host)
-
-        break
-      }
-
       case 'insert-css': {
         const { elementId, css } = request
 
@@ -153,7 +147,14 @@ export function storeCSSInPage(data, responseFunc = null) {
 
 export async function getHost() {
   return new Promise((resolve) => {
-    sendMessageToTab({ type: 'get-host' }, resolve)
+    if (browser) {
+      browser?.tabs?.query({ currentWindow: true, active: true }, (tabs) => {
+        const url = new URL(tabs[0].url)
+        resolve(url.hostname)
+      })
+    } else {
+      resolve('localhost')
+    }
   })
 }
 
