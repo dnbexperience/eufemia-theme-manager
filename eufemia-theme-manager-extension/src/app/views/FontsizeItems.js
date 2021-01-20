@@ -132,7 +132,6 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
                       variant="tertiary"
                       icon="close"
                       icon_position="left"
-                      left="1rem"
                       size="small"
                       on_click={() => {
                         resetFontsize(key)

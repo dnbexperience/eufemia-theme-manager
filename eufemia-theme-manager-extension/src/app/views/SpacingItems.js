@@ -116,7 +116,6 @@ export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
                       variant="tertiary"
                       icon="close"
                       icon_position="left"
-                      left="1rem"
                       size="small"
                       on_click={() => {
                         resetSpacing(key)
