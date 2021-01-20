@@ -6,8 +6,10 @@ import ThemeSelector from './ThemeSelector'
 export default function Header() {
   return (
     <HeaderArea>
-      <H1 size="medium">Eufemia Theme Manager</H1>
-      <ThemeSelector left="1rem" />
+      <H1 className="dnb-sr-only" size="medium">
+        Eufemia Theme Manager
+      </H1>
+      <ThemeSelector />
     </HeaderArea>
   )
 }

@@ -22,7 +22,7 @@ export function ThemePicker(props) {
   return (
     <StyledDropdown
       skip_portal
-      // label="In use:"
+      label="Theme in use:"
       title="Used theme:"
       value={currentThemeId}
       data={themesList}

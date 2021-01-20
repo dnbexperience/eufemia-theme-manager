@@ -108,7 +108,6 @@ const StickyArea = styled.div`
   left: 0;
   right: 0;
 
-  border-bottom: 1px solid var(--color-black-8);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
 `
 
