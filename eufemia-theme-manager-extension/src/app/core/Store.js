@@ -74,7 +74,7 @@ function themesStore(set, get) {
       return {
         colorsList: [],
         spacingsList: [],
-        fontsizeList: [],
+        fontsizesList: [],
       }
     },
     getTheme: (themeId = null) => {
