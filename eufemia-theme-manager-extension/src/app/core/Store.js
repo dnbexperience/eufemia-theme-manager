@@ -46,6 +46,32 @@ function themesStore(set, get) {
 
       return themes
     },
+    importJSON: (json, { overwrite } = {}) => {
+      try {
+        const data = JSON.parse(json)
+        if (data) {
+          const existingThemes = get().themes
+
+          const themes = Object.entries(data).reduce(
+            (acc, [key, theme]) => {
+              if (!['dnb-ui', 'blue-test', '2x-test'].includes(key)) {
+                if (overwrite) {
+                  acc[key] = theme
+                } else if (!acc[key]) {
+                  acc[key] = theme
+                }
+              }
+              return acc
+            },
+            { ...existingThemes }
+          )
+
+          set({ themes })
+        }
+      } catch (e) {
+        useErrorStore.getState().setError(e.message)
+      }
+    },
     createEmptyTheme: (themeId) => {
       const { themes, getThemeConstructs } = get()
 

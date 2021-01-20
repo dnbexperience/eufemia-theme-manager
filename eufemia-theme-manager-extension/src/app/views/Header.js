@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { H1 } from 'dnb-ui-lib/elements'
 import ThemeSelector from './ThemeSelector'
+import ImportExport from './ImportExport'
 
 export default function Header() {
   return (
@@ -10,6 +11,7 @@ export default function Header() {
         Eufemia Theme Manager
       </H1>
       <ThemeSelector />
+      <ImportExport left="1rem" />
     </HeaderArea>
   )
 }
