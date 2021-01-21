@@ -2,8 +2,6 @@ import React from 'react'
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
 import { Tabs, ProgressIndicator } from 'dnb-ui-lib/components'
-// import { P } from 'dnb-ui-lib/elements'
-// import { ScrollView } from 'dnb-ui-lib/fragments'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
 import { generateThemeIgnoreColors } from '../shared/ColorController'
@@ -168,9 +166,7 @@ const StyledTabs = styled(Tabs)`
   }
 `
 
-const Main = styled.main`
-  /* min-height: var(--extension-height); */
-`
+const Main = styled.main``
 
 const IndicatorArea = styled.div`
   display: flex;
