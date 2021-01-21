@@ -1,7 +1,8 @@
 import React from 'react'
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Tabs, ProgressIndicator } from 'dnb-ui-lib/components'
+import { Tabs } from 'dnb-ui-lib/components'
+import { P } from 'dnb-ui-lib/elements'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
 import { generateThemeIgnoreColors } from '../shared/ColorController'
@@ -181,8 +182,7 @@ const IndicatorArea = styled.div`
 function Indicator() {
   return (
     <IndicatorArea>
-      <ProgressIndicator label="Booting up ..." />
-      {/* <P>Booting up ...</P> */}
+      <P>Booting up</P>
     </IndicatorArea>
   )
 }
