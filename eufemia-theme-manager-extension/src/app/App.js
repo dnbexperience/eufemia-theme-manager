@@ -1,8 +1,9 @@
 import React from 'react'
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import { P } from 'dnb-ui-lib/elements'
-import { Tabs } from 'dnb-ui-lib/components'
+import { Tabs, ProgressIndicator } from 'dnb-ui-lib/components'
+// import { P } from 'dnb-ui-lib/elements'
+// import { ScrollView } from 'dnb-ui-lib/fragments'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
 import { generateThemeIgnoreColors } from '../shared/ColorController'
@@ -129,13 +130,15 @@ function GlobalStyles() {
       styles={css`
         :root {
           --extension-width: 40rem; /* max 800px (50rem) */
-          --extension-height: 37rem; /* max 600px */
+          --extension-height: 37.5rem; /* max 600px */
         }
 
         ${isDev ? 'html{ font-size: 100% !important; }' : ''}
 
         body {
-          overflow-y: scroll;
+          /* The extension has it's own scroller, so this helps the Modal */
+          width: var(--extension-width);
+          height: var(--extension-height);
           overscroll-behavior-x: none;
         }
 
@@ -148,7 +151,9 @@ function GlobalStyles() {
 }
 
 const Layout = styled.div`
+  /* Fixes the Modal issues */
   width: var(--extension-width);
+  height: var(--extension-height);
 `
 
 const StyledTabs = styled(Tabs)`
@@ -157,12 +162,14 @@ const StyledTabs = styled(Tabs)`
   }
   .dnb-tabs__content {
     margin-top: 0;
+
+    /* Because of the Footer Toolbar */
     margin-bottom: 5rem;
   }
 `
 
 const Main = styled.main`
-  min-height: var(--extension-height);
+  /* min-height: var(--extension-height); */
 `
 
 const IndicatorArea = styled.div`
@@ -178,7 +185,8 @@ const IndicatorArea = styled.div`
 function Indicator() {
   return (
     <IndicatorArea>
-      <P>Booting up ...</P>
+      <ProgressIndicator label="Booting up ..." />
+      {/* <P>Booting up ...</P> */}
     </IndicatorArea>
   )
 }

@@ -46,7 +46,7 @@ function ExportContent() {
   })
 
   return (
-    <Textarea placeholder="JSON data" stretch rows="10">
+    <Textarea stretch rows="10">
       {JSON.stringify(exportContent, null, 2)}
     </Textarea>
   )
@@ -68,7 +68,7 @@ function ImportContent() {
     >
       <FormRow direction="vertical">
         <Textarea
-          placeholder="JSON data"
+          placeholder="Paste JSON data ..."
           stretch
           rows="10"
           value={content}
