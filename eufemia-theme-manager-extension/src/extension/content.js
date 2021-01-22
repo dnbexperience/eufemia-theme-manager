@@ -22,12 +22,6 @@ if (hasEnabledLocalThemeData()) {
     setLocalThemeData({ themes })
     setLocalThemeModifications()
   })
-
-  // const store = JSON.parse(
-  //   window.localStorage.getItem('eufemia-theme-editor') || '{}'
-  // )
-  // if (store?.state?.enabled) {
-  // }
 }
 
 listenForExtensionRequests({

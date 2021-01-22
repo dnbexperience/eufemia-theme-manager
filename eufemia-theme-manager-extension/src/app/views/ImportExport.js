@@ -8,7 +8,8 @@ import {
   Textarea,
 } from 'dnb-ui-lib/components'
 import { download, send } from 'dnb-ui-lib/icons'
-import { useThemeStore } from '../core/Store'
+import { useThemeStore, useAppStore, useErrorStore } from '../core/Store'
+import { getModificationsFromContentAsync } from '../../shared/Bridge'
 
 export default function ImportExport(props) {
   return (
@@ -35,33 +36,52 @@ export default function ImportExport(props) {
 }
 
 function ExportContent() {
-  const { getThemes } = useThemeStore()
+  const { hosts } = useAppStore()
+  const { themes } = useThemeStore()
+  const ref = React.useRef()
 
-  const [exportContent] = React.useState(() => {
-    const exportContent = { ...getThemes() }
-    delete exportContent['dnb-ui']
-    delete exportContent['blue-test']
-    delete exportContent['2x-test']
-    return exportContent
+  const [data, setData] = React.useState(async () => {
+    const { modifications } = await getModificationsFromContentAsync()
+
+    setData({ themes, modifications, hosts })
+
+    return 'Preparing data ...'
   })
 
   return (
-    <Textarea stretch rows="10">
-      {JSON.stringify(exportContent, null, 2)}
+    <Textarea
+      readOnly
+      stretch
+      rows="10"
+      inner_ref={ref}
+      onMouseDown={() => {
+        if (ref?.current) {
+          ref?.current.select()
+        }
+      }}
+    >
+      {JSON.stringify(data, null, 2)}
     </Textarea>
   )
 }
 
 function ImportContent() {
-  const [content, contentSet] = React.useState(null)
+  const [json, jsonSet] = React.useState(null)
   const [overwrite, overwriteSet] = React.useState(false)
-  const { importJSON } = useThemeStore()
+  const { importThemes } = useThemeStore()
+  const { importAppData } = useAppStore()
 
   return (
     <FormSet
       on_submit={() => {
-        if (content) {
-          importJSON(content, { overwrite })
+        if (json) {
+          try {
+            const data = JSON.parse(json)
+            importThemes(data.themes, { overwrite })
+            importAppData(data.hosts, { overwrite })
+          } catch (e) {
+            useErrorStore.getState().setError(e.message)
+          }
         }
       }}
       prevent_submit={true}
@@ -71,9 +91,9 @@ function ImportContent() {
           placeholder="Paste JSON data ..."
           stretch
           rows="10"
-          value={content}
+          value={json}
           on_change={({ value }) => {
-            contentSet(value)
+            jsonSet(value)
           }}
         />
         <FormRow direction="horizontal" centered top="0.5rem">

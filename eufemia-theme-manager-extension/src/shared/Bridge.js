@@ -43,9 +43,9 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
 
         if (typeof css !== 'undefined') {
           insertCSS(css, { elementId })
-
-          response(request)
         }
+
+        response(request)
 
         break
       }
@@ -55,9 +55,9 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
 
         if (typeof css !== 'undefined') {
           setLocalThemeData({ css })
-
-          response(request) // not used yet
         }
+
+        response(request)
 
         break
       }
@@ -67,23 +67,31 @@ export function listenForExtensionRequests({ onResponse = null } = {}) {
 
         if (typeof themes !== 'undefined') {
           setLocalThemeData({ themes })
-
-          response(request) // not used yet
         }
+
+        response(request)
+
+        break
+      }
+
+      case 'get-modifications': {
+        const modifications = JSON.parse(
+          window.localStorage.getItem('eufemia-theme-editor') || '{}'
+        )
+
+        response({ modifications })
 
         break
       }
 
       default:
-        // response(request) // not used yet
+        response(request) // only to have a fallback
         return false
     }
 
     if (typeof onResponse === 'function') {
       onResponse(request)
     }
-
-    // response(request) // not used yet
 
     return true
   })
@@ -93,8 +101,7 @@ export function getThemesAsync() {
   return new Promise((resolve, reject) => {
     if (browser) {
       try {
-        browser?.runtime.sendMessage(
-          extensionId,
+        sendMessageToRuntime(
           {
             type: 'get-themes',
           },
@@ -107,6 +114,27 @@ export function getThemesAsync() {
       }
     } else {
       resolve({ themes: null })
+    }
+  })
+}
+
+export function getModificationsFromContentAsync() {
+  return new Promise((resolve, reject) => {
+    if (browser) {
+      try {
+        sendMessageToTab(
+          {
+            type: 'get-modifications',
+          },
+          (response) => {
+            resolve(response || { modifications: {} })
+          }
+        )
+      } catch (e) {
+        reject(e)
+      }
+    } else {
+      resolve({ modifications: {} })
     }
   })
 }

@@ -46,13 +46,12 @@ function themesStore(set, get) {
 
       return themes
     },
-    importJSON: (json, { overwrite } = {}) => {
+    importThemes: (themesData, { overwrite } = {}) => {
       try {
-        const data = JSON.parse(json)
-        if (data) {
+        if (themesData) {
           const existingThemes = get().themes
 
-          const themes = Object.entries(data).reduce(
+          const themes = Object.entries(themesData).reduce(
             (acc, [key, theme]) => {
               if (!['dnb-ui', 'blue-test', '2x-test'].includes(key)) {
                 if (overwrite) {
@@ -338,6 +337,29 @@ function hostStore(set, get) {
         data
       )
       set({ hosts })
+    },
+    importAppData: (hostsData, { overwrite } = {}) => {
+      try {
+        if (hostsData) {
+          const existingData = get().hosts
+
+          const hosts = Object.entries(hostsData).reduce(
+            (acc, [key, data]) => {
+              if (overwrite) {
+                acc[key] = data
+              } else if (!acc[key]) {
+                acc[key] = data
+              }
+              return acc
+            },
+            { ...existingData }
+          )
+
+          set({ hosts })
+        }
+      } catch (e) {
+        useErrorStore.getState().setError(e.message)
+      }
     },
   }
 }
