@@ -76,8 +76,8 @@ function ImportContent() {
             contentSet(value)
           }}
         />
-        <FormRow direction="horizontal" centered>
-          <Button type="submit" text="Import" top="0.5rem" right />
+        <FormRow direction="horizontal" centered top="0.5rem">
+          <Button type="submit" text="Import" right />
           <Checkbox
             checked={overwrite}
             on_change={({ checked }) => {
