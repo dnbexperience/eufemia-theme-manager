@@ -164,17 +164,20 @@ function themesStore(set, get) {
       // Color utils
       const changeColor = (origKey, object) => {
         const theme = getState()
-        let found
+        let found = false
+
+        object.key = origKey
 
         const colorsList = (theme?.colorsList || []).map((item) => {
           if (item.key === origKey) {
-            found = item = { ...item, ...object }
+            item = { ...item, ...object }
+            found = Boolean(item)
           }
           return item
         })
 
         if (!found) {
-          colorsList.push(Object.assign(object))
+          colorsList.push(object)
         }
 
         setState({ colorsList })

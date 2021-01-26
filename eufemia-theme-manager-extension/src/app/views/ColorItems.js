@@ -137,9 +137,9 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
                     label="Custom color"
                     label_position="left"
                     checked={useCustomColor}
-                    on_change={({ checked }) => {
+                    on_change={({ checked }) =>
                       changeColor(key, { useCustomColor: checked })
-                    }}
+                    }
                   />
                   {enabled && (
                     <Button
@@ -149,9 +149,7 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
                       icon_position="left"
                       left="1rem"
                       size="small"
-                      on_click={() => {
-                        resetColor(key)
-                      }}
+                      on_click={() => resetColor(key)}
                     />
                   )}
                 </FormRow>
