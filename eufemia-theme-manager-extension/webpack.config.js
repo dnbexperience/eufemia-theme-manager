@@ -27,17 +27,6 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   use: [
-      //     {
-      //       loader: 'babel-loader',
-      //     },
-      //   ],
-      //   resolve: {
-      //     fullySpecified: false, // Because of @dnb/eufemia is type of module
-      //   },
-      // },
       {
         test: /\.(js|jsx)$/,
         loader: 'esbuild-loader',
