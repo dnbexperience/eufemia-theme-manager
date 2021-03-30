@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './app/App'
+import App from './App'
 // import reportWebVitals from './app/reportWebVitals'
 
 import 'dnb-ui-lib/style'
