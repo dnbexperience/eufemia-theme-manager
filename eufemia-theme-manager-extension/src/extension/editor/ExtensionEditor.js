@@ -165,14 +165,6 @@ function showOutline({ path }) {
   document.querySelectorAll(path)?.forEach((elem) => {
     marker.show(elem)
   })
-
-  const element = document.querySelector(path)
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
-  }
 }
 
 function useThemes(themesHash) {
