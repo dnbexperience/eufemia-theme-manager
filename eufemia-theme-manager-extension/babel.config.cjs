@@ -14,5 +14,7 @@ module.exports = {
       },
     ],
     ['@babel/preset-react'],
+    ['@emotion/babel-preset-css-prop'],
   ],
+  plugins: ['@emotion/babel-plugin', '@babel/plugin-proposal-class-properties'],
 }

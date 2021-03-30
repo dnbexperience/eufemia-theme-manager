@@ -9,11 +9,9 @@
     "build:app": "webpack build",
     "build:watch": "nodemon --exec 'yarn build:chrome' --watch 'src/*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
     "build:watch:firefox": "nodemon --exec 'yarn build:firefox' --watch 'src/*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
-    "build:chrome": "REACT_APP_BROWSER=chrome yarn concurrently 'yarn build:extension'",
-    "build:chrome:old": "REACT_APP_BROWSER=chrome yarn concurrently 'yarn build:react' 'yarn build:extension'",
-    "build:firefox": "REACT_APP_BROWSER=firefox yarn concurrently 'yarn build:react' 'yarn build:extension'",
-    "build:react": "./script/build.sh react",
-    "build:extension": "./script/build.sh extension",
+    "build:chrome": "REACT_APP_BROWSER=chrome yarn concurrently 'yarn build:copy' 'yarn build:app'",
+    "build:firefox": "REACT_APP_BROWSER=firefox yarn concurrently 'yarn build:copy' 'yarn build:app'",
+    "build:copy": "./script/copy_files.sh",
     "start:firefox": "web-ext run --source-dir ./dist-firefox/"
   },
   "dependencies": {
