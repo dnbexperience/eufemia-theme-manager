@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const dotenv = require('dotenv')
 dotenv.config()
 
-const browser = process.env.REACT_APP_BROWSER
+const browser = process.env.RUNTIME_BROWSER
 
 if (typeof process !== 'undefined') {
   process.env.NODE_ENV = 'production'
@@ -75,8 +75,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'main.css',
     }),
-    new webpack.ProvidePlugin({
-      process: 'process/browser',
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(makeEnvObj(process.env)),
     }),
   ],
+}
+
+function makeEnvObj(env) {
+  return Object.entries(env).reduce((acc, [key, val]) => {
+    if (key.startsWith('RUNTIME_')) {
+      acc[key] = val
+    }
+    return acc
+  }, {})
 }

@@ -32,7 +32,7 @@ const watchChanges = (dir, lastTimestamp) => {
   })
 }
 
-if (process.env.REACT_APP_EXTENSION_DEV_WATCH) {
+if (process.env.RUNTIME_EXTENSION_DEV_WATCH) {
   browser?.management?.getSelf((self) => {
     if (self.installType === 'development') {
       if (typeof browser?.runtime?.getPackageDirectoryEntry === 'function') {

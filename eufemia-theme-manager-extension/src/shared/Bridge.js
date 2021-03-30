@@ -7,7 +7,7 @@ import {
 
 const extensionId =
   (process.env.NODE_ENV === 'development' &&
-    process.env.REACT_APP_CHROME_EXTENSION_ID) ||
+    process.env.RUNTIME_CHROME_EXTENSION_ID) ||
   undefined
 
 export function getTabId(cbFunc) {

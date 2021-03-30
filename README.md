@@ -35,6 +35,6 @@ You will also see any lint errors in the console.
 In case you want to run the app only, you have to define that in an `.env` file.
 
 1. Create a `.env` file.
-1. Set the dev mode to true: `REACT_APP_EXTENSION_DEV_LOCALHOST=true`,
-1. Set the watch mode to true: `REACT_APP_EXTENSION_DEV_WATCH=true`,
-1. And optionally, set the browser defined extension ID (e.g. REACT_APP_CHROME_EXTENSION_ID=jckgnjhmlbjndbemghpeadkbkbcidpgl)
+1. Set the dev mode to true: `RUNTIME_EXTENSION_DEV_LOCALHOST=true`,
+1. Set the watch mode to true: `RUNTIME_EXTENSION_DEV_WATCH=true`,
+1. And optionally, set the browser defined extension ID (e.g. RUNTIME_CHROME_EXTENSION_ID=jckgnjhmlbjndbemghpeadkbkbcidpgl)

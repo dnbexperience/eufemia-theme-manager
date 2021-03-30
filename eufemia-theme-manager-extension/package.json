@@ -9,8 +9,8 @@
     "build:app": "webpack build",
     "build:watch": "nodemon --exec 'yarn build:chrome' --watch 'src/*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
     "build:watch:firefox": "nodemon --exec 'yarn build:firefox' --watch 'src/*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
-    "build:chrome": "REACT_APP_BROWSER=chrome yarn concurrently 'yarn build:copy' 'yarn build:app'",
-    "build:firefox": "REACT_APP_BROWSER=firefox yarn concurrently 'yarn build:copy' 'yarn build:app'",
+    "build:chrome": "RUNTIME_BROWSER=chrome yarn concurrently 'yarn build:copy' 'yarn build:app'",
+    "build:firefox": "RUNTIME_BROWSER=firefox yarn concurrently 'yarn build:copy' 'yarn build:app'",
     "build:copy": "./script/copy_files.sh",
     "start:firefox": "web-ext run --source-dir ./dist-firefox/"
   },
@@ -50,7 +50,6 @@
     "html-loader": "^2.1.2",
     "mini-css-extract-plugin": "^1.4.0",
     "nodemon": "^2.0.7",
-    "process": "^0.11.10",
     "rimraf": "^3.0.2",
     "style-loader": "^2.0.0",
     "web-ext": "^5.5.0",
