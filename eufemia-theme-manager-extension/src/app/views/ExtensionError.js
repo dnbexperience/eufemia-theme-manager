@@ -1,5 +1,5 @@
 import React from 'react'
-import { GlobalStatus } from 'dnb-ui-lib/components'
+import { GlobalStatus } from '@dnb/eufemia/components'
 import { useErrorStore } from '../core/Store'
 
 export default function ExtensionError(props) {

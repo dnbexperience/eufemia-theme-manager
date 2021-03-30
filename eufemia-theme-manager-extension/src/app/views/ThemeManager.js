@@ -8,8 +8,8 @@ import {
   FormSet,
   FormRow,
   Dropdown,
-} from 'dnb-ui-lib/components'
-import { exclamation_circled } from 'dnb-ui-lib/icons'
+} from '@dnb/eufemia/components'
+import { exclamation_circled } from '@dnb/eufemia/icons'
 import { useThemeStore, useAppStore } from '../core/Store'
 
 export default function ThemeManager(props) {

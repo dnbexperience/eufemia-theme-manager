@@ -64,7 +64,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.12.13":
+"@babel/runtime@^7.13.10":
   version "7.13.10"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.13.10.tgz#47d42a57b6095f4468da440388fdbad8bebf0d7d"
   integrity sha512-4QPkjJq6Ns3V/RgpEahRk+AGfL0eO6RHHtTWoNNr5mO49G6B5+X6d6THgWEAvTrznU5xYpbAlVKRYcsCgh/Akw==
@@ -109,6 +109,19 @@
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.2.tgz#8f03a22a04de437254e8ce8cc84ba39689288752"
   integrity sha512-HyYEUDeIj5rRQU2Hk5HTB2uHsbRQpF70nvMhVzi+VJR0X+xNEhjPui4/kBf3VeH/wqD28PT4sVOm8qqLjBrSZg==
+
+"@dnb/eufemia@^9.1.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@dnb/eufemia/-/eufemia-9.1.0.tgz#84f52810d294a4a9770a85cf916d53bbc40fc4a7"
+  integrity sha512-5crb/nuPGHfq3BWPutHttbF+zOtvQ7k8SLOaGwwK6ORHwXkoS/XtLzQJmaCMh9cHEtBVI0oWjW0rMa8EXhbcpw==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    classnames "^2.2.6"
+    core-js "^3.9.1"
+    date-fns "^2.19.0"
+    keycode "^2.2.0"
+    react-text-mask "^5.4.3"
+    what-input "^5.2.10"
 
 "@emotion/babel-plugin@^11.1.2":
   version "11.2.0"
@@ -1662,7 +1675,7 @@ core-js@3.8.3:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.8.3.tgz#c21906e1f14f3689f93abcc6e26883550dd92dd0"
   integrity sha512-KPYXeVZYemC2TkNEkX/01I+7yd+nX3KddKwZ1Ww7SKWdI2wQprSgLmrTddT8nw92AjEklTsPBoSdQBhbI1bQ6Q==
 
-core-js@^3.8.3:
+core-js@^3.9.1:
   version "3.9.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.9.1.tgz#cec8de593db8eb2a85ffb0dbdeb312cb6e5460ae"
   integrity sha512-gSjRvzkxQc1zjM/5paAmL4idJBFzuJoo+jDjF1tStYFMV2ERfD02HhahhCGXUyHxQRG4yFKVSdO6g62eoRMcDg==
@@ -1794,7 +1807,7 @@ date-fns@^2.16.1:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
 
-date-fns@^2.17.0:
+date-fns@^2.19.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.19.0.tgz#65193348635a28d5d916c43ec7ce6fbd145059e1"
   integrity sha512-X3bf2iTPgCAQp9wvjOQytnf5vO5rESYRXlPIVcgSbtT5OTScPcsf9eZU+B/YIkKAtYr5WeCii58BgATrNitlWg==
@@ -1980,19 +1993,6 @@ dispensary@0.61.0:
     sha.js "~2.4.4"
     source-map-support "~0.5.4"
     yargs "~16.2.0"
-
-dnb-ui-lib@^8.4.2:
-  version "8.4.2"
-  resolved "https://registry.yarnpkg.com/dnb-ui-lib/-/dnb-ui-lib-8.4.2.tgz#ece74b9090ae75685407d426da4d49958972d323"
-  integrity sha512-WJxjqXH/yDEWD5W554lgPWlBx8oL8eLX5BskqKAHMvdz5bAROS/h5Kh9YouhPjMpv/wvOeOemZj9GqDl/toV7w==
-  dependencies:
-    "@babel/runtime" "^7.12.13"
-    classnames "^2.2.6"
-    core-js "^3.8.3"
-    date-fns "^2.17.0"
-    keycode "^2.2.0"
-    react-text-mask "^5.4.3"
-    what-input "^5.2.10"
 
 dns-equal@^1.0.0:
   version "1.0.0"

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Input, Switch, FormRow } from 'dnb-ui-lib/components'
+import { Input, Switch, FormRow } from '@dnb/eufemia/components'
 import { useAppStore } from '../core/Store'
 
 export default function ThemeFilter({ cacheKey, ...props }) {

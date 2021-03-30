@@ -2,19 +2,19 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from '@emotion/styled'
 
-import { ToggleButton, Space, Dropdown } from 'dnb-ui-lib/components'
-import { P } from 'dnb-ui-lib/elements'
-import { Provider as EufemiaProvider } from 'dnb-ui-lib/shared'
-import { chevron_down, chevron_up, add } from 'dnb-ui-lib/icons'
+import { ToggleButton, Space, Dropdown } from '@dnb/eufemia/components'
+import { P } from '@dnb/eufemia/elements'
+import { Provider as EufemiaProvider } from '@dnb/eufemia/shared'
+import { chevron_down, chevron_up, add } from '@dnb/eufemia/icons'
 
 import { generateThemeIgnoreColors } from '../../shared/ColorController'
 import { useEditorStore } from './EditorStore'
 import { createDOMInspector, createInspectorMarker } from '../../shared/DOM'
 import { getThemesAsync } from '../../shared/Bridge'
 
-// import 'dnb-ui-lib/style/basis'
-// import 'dnb-ui-lib/style/components'
-// import 'dnb-ui-lib/style/themes/ui'
+// import '@dnb/eufemia/style/basis'
+// import '@dnb/eufemia/style/components'
+// import '@dnb/eufemia/style/themes/ui'
 
 const Layout = styled.div`
   position: fixed;

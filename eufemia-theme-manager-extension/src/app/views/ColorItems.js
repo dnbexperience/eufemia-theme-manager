@@ -9,11 +9,11 @@ import {
   FormRow,
   Button,
   Icon,
-  Number,
+  NumberFormat,
   FormStatus,
-} from 'dnb-ui-lib/components'
-import { H3, P, Hr } from 'dnb-ui-lib/elements'
-import { arrow_right } from 'dnb-ui-lib/icons'
+} from '@dnb/eufemia/components'
+import { H3, P, Hr } from '@dnb/eufemia/elements'
+import { arrow_right } from '@dnb/eufemia/icons'
 import { useTheme, useAppStore } from '../core/Store'
 import {
   originalColorsAsArray,
@@ -88,7 +88,9 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
                     <Icon right="0.25rem" icon={arrow_right} />
                     {contrastValue && (
                       <span className="dnb-p--x-small" title="Contrast">
-                        <Number decimals={1}>{contrastValue}</Number>
+                        <NumberFormat decimals={1}>
+                          {contrastValue}
+                        </NumberFormat>
                       </span>
                     )}
                   </P>

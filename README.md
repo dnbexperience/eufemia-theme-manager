@@ -2,7 +2,7 @@
 
 This is a browser extension to help creating [Eufemia Design System](https://eufemia.dnb.no) UI Themes.
 
-It can target any output, using the `dnb-ui-lib` with all their CSS vars, like `--color-black` etc.\
+It can target any output, using the `@dnb/eufemia` with all their CSS vars, like `--color-black` etc.\
 The target can then get manipulated in various ways.
 
 ## State of art

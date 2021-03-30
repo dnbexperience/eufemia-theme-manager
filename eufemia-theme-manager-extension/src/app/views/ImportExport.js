@@ -6,8 +6,8 @@ import {
   FormSet,
   FormRow,
   Textarea,
-} from 'dnb-ui-lib/components'
-import { download, send } from 'dnb-ui-lib/icons'
+} from '@dnb/eufemia/components'
+import { download, send } from '@dnb/eufemia/icons'
 import { useThemeStore, useAppStore, useErrorStore } from '../core/Store'
 import { getModificationsFromContentAsync } from '../../shared/Bridge'
 

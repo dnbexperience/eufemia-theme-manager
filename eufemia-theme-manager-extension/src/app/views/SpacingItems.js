@@ -8,9 +8,9 @@ import {
   Icon,
   Dropdown,
   FormStatus,
-} from 'dnb-ui-lib/components'
-import { H3, Hr } from 'dnb-ui-lib/elements'
-import { arrow_right } from 'dnb-ui-lib/icons'
+} from '@dnb/eufemia/components'
+import { H3, Hr } from '@dnb/eufemia/elements'
+import { arrow_right } from '@dnb/eufemia/icons'
 import { useTheme, useAppStore } from '../core/Store'
 import {
   originalSpacingsAsArray,

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { H1 } from 'dnb-ui-lib/elements'
+import { H1 } from '@dnb/eufemia/elements'
 import ThemeSelector from './ThemeSelector'
 import ImportExport from './ImportExport'
 

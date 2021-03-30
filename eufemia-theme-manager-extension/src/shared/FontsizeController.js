@@ -1,4 +1,4 @@
-import properties from 'dnb-ui-lib/style/properties'
+import properties from '@dnb/eufemia/style/properties'
 
 export const originalFontsizesAsObject = getOriginalFontsizesAsObject()
 export const originalFontsizesAsArray = getOriginalFontsizesAsArray()

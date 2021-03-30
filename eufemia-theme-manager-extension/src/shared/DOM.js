@@ -1,4 +1,4 @@
-import { getOffsetTop, getOffsetLeft } from 'dnb-ui-lib/shared/helpers'
+import { getOffsetTop, getOffsetLeft } from '@dnb/eufemia/shared/helpers'
 
 const containers = [] // stores container HTMLElement references
 const styleElements = [] // stores {prepend: HTMLElement, append: HTMLElement}

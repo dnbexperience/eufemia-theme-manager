@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import App from './App'
 // import reportWebVitals from './app/reportWebVitals'
 
-import 'dnb-ui-lib/style'
-import stylisPlugin from 'dnb-ui-lib/style/stylis'
-import { Provider as EufemiaProvider } from 'dnb-ui-lib/shared'
+import '@dnb/eufemia/style'
+import stylisPlugin from '@dnb/eufemia/style/stylis'
+import { Provider as EufemiaProvider } from '@dnb/eufemia/shared'
 
 import { CacheProvider } from '@emotion/react'
 import createEmotionCache from '@emotion/cache'
