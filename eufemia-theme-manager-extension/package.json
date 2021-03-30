@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "clean": "yarn concurrently 'rimraf ./dist-chrome/' 'rimraf ./dist-firefox/'",
     "start": "webpack serve",
     "build": "yarn build:zip",
     "build:zip": "rimraf ./dist-chrome/ && yarn build:chrome && web-ext build --source-dir ./dist-chrome/ --filename eufemia_theme_manager-latest.zip  --overwrite-dest",
