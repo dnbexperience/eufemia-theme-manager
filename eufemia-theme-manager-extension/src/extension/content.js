@@ -1,3 +1,4 @@
+import browser from '../shared/Browser'
 import { createThemeEditor, removeThemeEditor } from './editor/ExtensionEditor'
 import {
   listenForExtensionRequests,
@@ -45,7 +46,7 @@ listenForExtensionRequests({
   },
 })
 
-let unsub
+browser.unsub
 function setLocalThemeModifications() {
   if (hasEnabledLocalThemeData()) {
     setLocalThemeCSS()
@@ -57,8 +58,8 @@ function setLocalThemeModifications() {
 
     createThemeEditor()
 
-    if (typeof unsub === 'undefined') {
-      unsub = listenForModifications({
+    if (typeof browser.unsub === 'undefined') {
+      browser.unsub = listenForModifications({
         onModification: () => {
           const themes = getLocalThemeData()?.themes
           applyModifications({ themes })
@@ -70,11 +71,11 @@ function setLocalThemeModifications() {
         },
       })
     }
-  } else if (unsub) {
+  } else if (typeof browser.unsub === 'function') {
     removeThemeEditor()
     removeCustomModifications()
 
-    unsub()
-    unsub = undefined
+    browser.unsub()
+    browser.unsub = undefined
   }
 }
