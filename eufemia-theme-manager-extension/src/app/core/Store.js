@@ -193,7 +193,6 @@ function themesStore(set, get) {
       const resetColor = (rmKey) => {
         changeColor(rmKey, {
           change: null,
-          useCustomColor: null,
         })
       }
       const useColorTools = () => {

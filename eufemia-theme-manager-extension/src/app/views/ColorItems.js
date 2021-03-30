@@ -1,7 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import styled from '@emotion/styled'
-import { TwitterPicker, SketchPicker } from 'react-color'
+import { TwitterPicker } from 'react-color'
 import Color from 'color'
 import {
   Space,
@@ -61,7 +61,7 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
       )}
 
       {colors.map((params) => {
-        const { key, value, name, change, useCustomColor } = params
+        const { key, value, name, change } = params
         const contrastValue = change
           ? Color(value).contrast(Color(change))
           : null
@@ -113,36 +113,16 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
 
               <FormRow direction="vertical">
                 <SimpleColorPicker>
-                  {useCustomColor ? (
-                    <SketchPicker
-                      // width="16rem"
-                      width="21rem"
-                      color={change || value}
-                      presetColors={originalPickerColorsWithTitle}
-                      disableAlpha={true}
-                      onChange={({ hex }) => setColor(key, hex, params)}
-                    />
-                  ) : (
-                    <TwitterPicker
-                      // width="28.5rem"
-                      width="22rem"
-                      color={change || value}
-                      colors={originalPickerColors}
-                      triangle="hide"
-                      onChange={({ hex }) => setColor(key, hex, params)}
-                    />
-                  )}
+                  <TwitterPicker
+                    width="22rem"
+                    color={change || value}
+                    colors={originalPickerColors}
+                    triangle="hide"
+                    onChange={({ hex }) => setColor(key, hex, params)}
+                  />
                 </SimpleColorPicker>
 
                 <FormRow top="0.5rem" centered direction="horizontal">
-                  <Switch
-                    label="Custom color"
-                    label_position="left"
-                    checked={useCustomColor}
-                    on_change={({ checked }) =>
-                      changeColor(key, { useCustomColor: checked })
-                    }
-                  />
                   {enabled && (
                     <Button
                       text="Reset color"
