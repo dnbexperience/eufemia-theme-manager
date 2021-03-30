@@ -13,6 +13,8 @@
 /dist
 /dist-chrome
 /dist-firefox
+/web-ext-artifacts/*
+!/web-ext-artifacts/*.zip
 
 # misc
 .DS_Store
