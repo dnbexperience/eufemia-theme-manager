@@ -15,6 +15,9 @@ module.exports = {
   optimization: {
     minimize: false,
   },
+  performance: {
+    hints: false,
+  },
   entry: {
     main: './src/app/index.js',
     content: './src/extension/content.js',
@@ -44,7 +47,6 @@ module.exports = {
           process.env.NODE_ENV === 'development'
             ? 'style-loader'
             : MiniCssExtractPlugin.loader,
-          // { loader: 'style-loader', options: { injectType: 'styleTag' } },
           'css-loader',
         ],
       },

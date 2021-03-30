@@ -7,7 +7,7 @@
     "build": "yarn build:zip",
     "build:zip": "rimraf ./dist-chrome/ && yarn build:chrome && web-ext build --source-dir ./dist-chrome/ --filename eufemia_theme_manager-latest.zip  --overwrite-dest",
     "build:app": "webpack build",
-    "build:watch": "nodemon --exec 'yarn build:chrome' --watch 'src/*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
+    "build:watch": "nodemon --exec 'NODE_ENV=development yarn build:chrome' --watch 'src/*' --watch '*.js' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
     "build:watch:firefox": "nodemon --exec 'yarn build:firefox' --watch 'src/*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
     "build:chrome": "RUNTIME_BROWSER=chrome yarn concurrently 'yarn build:copy' 'yarn build:app'",
     "build:firefox": "RUNTIME_BROWSER=firefox yarn concurrently 'yarn build:copy' 'yarn build:app'",
