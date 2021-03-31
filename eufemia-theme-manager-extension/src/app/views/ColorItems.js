@@ -114,7 +114,7 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
               <FormRow direction="vertical">
                 <SimpleColorPicker>
                   <TwitterPicker
-                    width="22rem"
+                    width="21.5rem"
                     color={change || value}
                     colors={originalPickerColors}
                     triangle="hide"
@@ -129,7 +129,7 @@ export default function ColorItems({ cacheKey = 'colors' } = {}) {
                       variant="tertiary"
                       icon="close"
                       icon_position="left"
-                      left="1rem"
+                      right="1rem"
                       size="small"
                       on_click={() => resetColor(key)}
                     />

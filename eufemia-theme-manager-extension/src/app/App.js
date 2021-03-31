@@ -1,7 +1,8 @@
 import React from 'react'
 import { css, Global } from '@emotion/react'
 import styled from '@emotion/styled'
-import { Tabs } from '@dnb/eufemia/components'
+import { Tabs, Space } from '@dnb/eufemia/components'
+import { ScrollView } from '@dnb/eufemia/fragments'
 import { P } from '@dnb/eufemia/elements'
 import Header from './views/Header'
 import ThemeFilter from './views/ThemeFilter'
@@ -19,6 +20,45 @@ import { getHost } from '../shared/Bridge'
 import { isDev } from '../shared/Browser'
 import { waitForPromise } from './core/Utils'
 import { useAppStore } from './core/Store'
+
+function GlobalStyles() {
+  const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
+    return [
+      generateThemeIgnoreColors(),
+      generateThemeIgnoreSpacings(),
+      generateThemeIgnoreFontsizes(),
+    ].join('')
+  })
+
+  return (
+    <Global
+      styles={css`
+        :root {
+          --extension-width: 40rem; /* max 800px (50rem) */
+          --extension-height: 37.5rem; /* max 600px */
+
+          overscroll-behavior-y: none; /* Disable smooth overscroll during an open modal  */
+        }
+
+        ${isDev ? 'html{ font-size: 100% !important; }' : ''}
+
+        body {
+          /* The extension has it's own scroller, so this helps the Modal */
+          width: var(--extension-width);
+          height: var(--extension-height);
+          overscroll-behavior-x: none;
+          overscroll-behavior-y: none;
+
+          background-color: var(--color-white);
+        }
+
+        .dnb-theme-ignore__willBeReplaced {
+          ${dnbThemeIgnore__willBeReplaced}
+        }
+      `}
+    />
+  )
+}
 
 export default function App() {
   return (
@@ -54,100 +94,81 @@ function TabsWithContent() {
 
   return (
     <Main>
-      <StickyArea>
+      <ErrorArea>
         <ExtensionError />
-      </StickyArea>
+      </ErrorArea>
 
-      <StyledTabs
-        data={[
-          { title: 'Colors', key: 'colors' },
-          { title: 'Spacing', key: 'spacings' },
-          { title: 'Font Size', key: 'fontsizes' },
-        ]}
-        selected_key={selectedTab}
-        on_change={({ selected_key }) => {
-          setSelectedTab(selected_key)
-        }}
-        section_style="mint-green"
-      >
-        {{
-          colors: (
-            <>
-              <StickyFilterArea>
-                <ThemeFilter key="colors" cacheKey="colors" />
-              </StickyFilterArea>
-              <ColorItems />
-            </>
-          ),
-          spacings: (
-            <>
-              <StickyFilterArea>
-                <ThemeFilter key="spacing" cacheKey="spacing" />
-              </StickyFilterArea>
-              <SpacingItems />
-            </>
-          ),
-          fontsizes: (
-            <>
-              <StickyFilterArea>
-                <ThemeFilter key="fontsize" cacheKey="fontsize" />
-              </StickyFilterArea>
-              <FontsizeItems />
-            </>
-          ),
-        }}
-      </StyledTabs>
+      <TabsArea left="small">
+        <Tabs
+          id="main-view"
+          tabs_style="mint-green"
+          data={[
+            { title: 'Colors', key: 'colors' },
+            { title: 'Spacing', key: 'spacings' },
+            { title: 'Font Size', key: 'fontsizes' },
+          ]}
+          selected_key={selectedTab}
+          on_change={({ selected_key }) => {
+            setSelectedTab(selected_key)
+          }}
+        />
+      </TabsArea>
+
+      <ScrollView>
+        <Tabs.Content id="main-view">
+          {({ key }) => {
+            const content = {
+              colors: () => (
+                <>
+                  <StyledFilterArea key="colors" cacheKey="colors" />
+                  <ColorItems />
+                </>
+              ),
+              spacings: () => (
+                <>
+                  <StyledFilterArea key="spacing" cacheKey="spacing" />
+                  <SpacingItems />
+                </>
+              ),
+              fontsizes: () => (
+                <>
+                  <StyledFilterArea key="fontsize" cacheKey="fontsize" />
+                  <FontsizeItems />
+                </>
+              ),
+            }
+
+            return content[key]()
+          }}
+        </Tabs.Content>
+      </ScrollView>
     </Main>
   )
 }
 
-const StickyArea = styled.div`
-  position: sticky;
+const ErrorArea = styled.div`
+  position: fixed;
   z-index: 11;
   top: 0;
   left: 0;
   right: 0;
+`
 
+const StyledFilterArea = styled(ThemeFilter)`
+  padding-top: 6rem;
+  background-color: var(--color-white);
+`
+
+const TabsArea = styled(Space)`
+  position: fixed;
+  z-index: 10;
+  top: 4rem;
+  left: 0;
+  right: 0;
+
+  background-color: var(--color-white);
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
 `
-
-const StickyFilterArea = styled(StickyArea)`
-  z-index: 10;
-`
-
-function GlobalStyles() {
-  const [dnbThemeIgnore__willBeReplaced] = React.useState(() => {
-    return [
-      generateThemeIgnoreColors(),
-      generateThemeIgnoreSpacings(),
-      generateThemeIgnoreFontsizes(),
-    ].join('')
-  })
-
-  return (
-    <Global
-      styles={css`
-        :root {
-          --extension-width: 40rem; /* max 800px (50rem) */
-          --extension-height: 37.5rem; /* max 600px */
-        }
-
-        ${isDev ? 'html{ font-size: 100% !important; }' : ''}
-
-        body {
-          /* The extension has it's own scroller, so this helps the Modal */
-          width: var(--extension-width);
-          height: var(--extension-height);
-          overscroll-behavior-x: none;
-        }
-
-        .dnb-theme-ignore__willBeReplaced {
-          ${dnbThemeIgnore__willBeReplaced}
-        }
-      `}
-    />
-  )
-}
 
 const Layout = styled.div`
   /* Fixes the Modal issues */
@@ -155,19 +176,12 @@ const Layout = styled.div`
   height: var(--extension-height);
 `
 
-const StyledTabs = styled(Tabs)`
-  .dnb-tabs__button__snap:first-of-type {
-    padding-left: var(--spacing-small);
-  }
-  .dnb-tabs__content {
-    margin-top: 0;
+const Main = styled.main`
+  /* To ensure we have a scrollbar in HTML */
+  min-height: 101vh;
 
-    /* Because of the Footer Toolbar */
-    margin-bottom: 5rem;
-  }
+  padding-bottom: 6rem;
 `
-
-const Main = styled.main``
 
 const IndicatorArea = styled.div`
   display: flex;

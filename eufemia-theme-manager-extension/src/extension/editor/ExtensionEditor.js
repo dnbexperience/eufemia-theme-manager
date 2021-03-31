@@ -216,7 +216,11 @@ function ModificationManager(props) {
                     { content: 'Inactive', selected_key: 'inactive' },
                     { content: 'Remove', selected_key: 'remove' },
                   ]}
-                  value={themeId || 'inactive'}
+                  value={
+                    themeId && listOfThemes
+                      ? listOfThemes.indexOf(themeId)
+                      : 'inactive'
+                  }
                   on_change={({ data }) => {
                     const themeId =
                       typeof data?.selected_key !== 'undefined'

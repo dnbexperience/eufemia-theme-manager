@@ -21,7 +21,7 @@ export function ThemePicker(props) {
 
   return (
     <StyledDropdown
-      skip_portal
+      fixed_position
       label="Theme in use:"
       title="Used theme:"
       value={currentThemeId}

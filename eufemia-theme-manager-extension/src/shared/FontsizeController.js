@@ -16,7 +16,7 @@ export function fillRemaningFontsizes(
     !(customFontsizesList?.findIndex(({ key }) => key === 'font-size') > -1)
   ) {
     originalFontsizesList = [
-      { key: 'font-size', name: 'Set font-size', value: null, change: null },
+      { key: 'font-size', name: 'Global font-size', value: null, change: null },
     ].concat(originalFontsizesList)
   }
 

@@ -112,7 +112,6 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
                   ) : (
                     <StyledDropdown
                       title="Choose a font-size"
-                      // label="Theme to Edit:"
                       skip_portal
                       value={originalPickerFontsizesWithTitle.findIndex(
                         ({ value }) => value === change
