@@ -6,6 +6,7 @@ import {
   FormRow,
   Button,
   Icon,
+  Slider,
   Dropdown,
   FormStatus,
 } from '@dnb/eufemia/components'
@@ -26,6 +27,12 @@ const originalPickerSpacingsWithTitle = originalSpacingsAsArray.map(
     value,
   })
 )
+
+originalPickerSpacingsWithTitle.unshift({
+  content: 'Custom Spacing',
+  key: 'custom-spacing',
+  value: '16px',
+})
 
 export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
   useScrollPosition()
@@ -95,18 +102,33 @@ export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
 
               <FormRow direction="vertical">
                 <SimpleSpacingPicker>
-                  <StyledDropdown
-                    title="Choose a spacing"
-                    // label="Theme to Edit:"
-                    skip_portal
-                    value={originalPickerSpacingsWithTitle.findIndex(
-                      ({ value }) => value === change
-                    )}
-                    data={originalPickerSpacingsWithTitle}
-                    on_change={({ data: { value } }) => {
-                      setSpacing(key, value, params)
-                    }}
-                  />
+                  {change && change.endsWith('px') ? (
+                    <SpacingSlider
+                      value={parseFloat(change) || 16}
+                      onDoubleClick={() => resetSpacing(key)}
+                      on_change={({ value }) => {
+                        setSpacing(key, `${value}px`, params)
+                      }}
+                    />
+                  ) : (
+                    <StyledDropdown
+                      title="Choose a spacing"
+                      skip_portal
+                      value={originalPickerSpacingsWithTitle.findIndex(
+                        ({ value }) => value === change
+                      )}
+                      data={originalPickerSpacingsWithTitle}
+                      on_change={({ data: { key: _key, value: _value } }) => {
+                        if (_key === 'custom-spacing') {
+                          const v = parseFloat(value)
+                          if (v > 0) {
+                            _value = `${v * 16}px`
+                          }
+                        }
+                        setSpacing(key, _value, params)
+                      }}
+                    />
+                  )}
                 </SimpleSpacingPicker>
 
                 <FormRow top="0.5rem" centered direction="horizontal">
@@ -131,6 +153,17 @@ export default function SpacingTools({ cacheKey = 'spacing' } = {}) {
     </List>
   )
 }
+
+const SpacingSlider = (props) => (
+  <Slider
+    stretch
+    min={2}
+    max={256}
+    step={1}
+    title="Set custom spacing"
+    {...props}
+  />
+)
 
 const StyledDropdown = styled(Dropdown)`
   --dropdown-width: 14rem;

@@ -28,6 +28,12 @@ const originalPickerFontsizesWithTitle = originalFontsizesAsArray.map(
   })
 )
 
+originalPickerFontsizesWithTitle.unshift({
+  content: 'Custom font-size',
+  key: 'custom-font-size',
+  value: '16px',
+})
+
 export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
   useScrollPosition()
   const { getHostData, getFilter } = useAppStore()
@@ -96,14 +102,9 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
 
               <FormRow direction="vertical">
                 <SimpleFontsizePicker>
-                  {key === 'font-size' ? (
-                    <Slider
-                      stretch
-                      min={8}
-                      max={64}
-                      step={1}
+                  {key === 'font-size' || (change && change.endsWith('px')) ? (
+                    <FontSizeSlider
                       value={parseFloat(change) || 16}
-                      title="Set custom font-size"
                       onDoubleClick={() => resetFontsize(key)}
                       on_change={({ value }) => {
                         setFontsize(key, `${value}px`, params)
@@ -117,8 +118,14 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
                         ({ value }) => value === change
                       )}
                       data={originalPickerFontsizesWithTitle}
-                      on_change={({ data: { value } }) => {
-                        setFontsize(key, value, params)
+                      on_change={({ data: { key: _key, value: _value } }) => {
+                        if (_key === 'custom-font-size') {
+                          const v = parseFloat(value)
+                          if (v > 0) {
+                            _value = `${v * 16}px`
+                          }
+                        }
+                        setFontsize(key, _value, params)
                       }}
                     />
                   )}
@@ -146,6 +153,17 @@ export default function FontsizeTools({ cacheKey = 'fontsize' } = {}) {
     </List>
   )
 }
+
+const FontSizeSlider = (props) => (
+  <Slider
+    stretch
+    min={8}
+    max={64}
+    step={1}
+    title="Set custom font-size"
+    {...props}
+  />
+)
 
 const StyledDropdown = styled(Dropdown)`
   --dropdown-width: 14rem;
