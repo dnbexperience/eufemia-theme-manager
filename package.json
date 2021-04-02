@@ -1,6 +1,9 @@
 {
   "name": "dnb-eufemia-theme-manager",
+  "private": true,
   "version": "1.0.0",
+  "license": "SEE LICENSE IN LICENSE FILE",
+  "author": "Tobias Høegh",
   "workspaces": [
     "eufemia-theme-manager-extension"
   ],
@@ -11,7 +14,5 @@
     "build:firefox": "yarn workspace eufemia-theme-manager-extension build:firefox",
     "dev": "yarn workspace eufemia-theme-manager-extension build:watch"
   },
-  "author": "Tobias Høegh",
-  "license": "SEE LICENSE IN LICENSE FILE",
-  "private": true
+  "devDependencies": {}
 }

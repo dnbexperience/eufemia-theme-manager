@@ -1,8 +1,8 @@
-// import dotenv from 'dotenv'
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const dotenv = require('dotenv')
+// import dotenv from 'dotenv'
 dotenv.config()
 
 const browser = process.env.RUNTIME_BROWSER
@@ -19,7 +19,7 @@ module.exports = {
     hints: false,
   },
   entry: {
-    main: './src/app/index.js',
+    main: './src/app/root.jsx',
     content: './src/extension/content.js',
     background: './src/extension/background.js',
     'hot-reload': './src/extension/hot-reload.js',
@@ -35,9 +35,10 @@ module.exports = {
         loader: 'esbuild-loader',
         options: {
           loader: 'jsx', // Remove this if you're not using JSX
-          target: 'es2016', // Syntax to compile to (see options below for possible values)
+          target: 'es2020', // Syntax to compile to (see options below for possible values)
         },
         resolve: {
+          extensions: ['.js', '.jsx'],
           fullySpecified: false, // Because of @dnb/eufemia is type of module
         },
       },
@@ -60,7 +61,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'public'),
     port: 3000,
-    // compress: true,
+    compress: false,
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -74,7 +75,7 @@ module.exports = {
 
 function makeEnvObj(env) {
   return Object.entries(env).reduce((acc, [key, val]) => {
-    if (key.startsWith('RUNTIME_')) {
+    if (/^(RUNTIME_|NODE_ENV)/.test(key)) {
       acc[key] = val
     }
     return acc
