@@ -1,7 +1,7 @@
 {
-  "name": "Eufemia Theme Manager",
-  "version": "1.2.1",
+  "version": "0.0.0-development",
   "manifest_version": 2,
+  "name": "Eufemia Theme Manager",
   "description": "Eufemia Theme Manager",
   "icons": {
     "400": "images/icon.png"

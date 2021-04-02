@@ -1,18 +1,19 @@
 {
   "name": "eufemia-theme-manager-extension",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "private": true,
   "scripts": {
     "clean": "yarn concurrently 'rimraf ./dist-chrome/*' 'rimraf ./dist-firefox/*'",
     "start": "vite",
     "build": "yarn build:zip",
     "build:zip": "rimraf ./dist-chrome/ && yarn build:chrome && web-ext build --source-dir ./dist-chrome/ --filename eufemia_theme_manager-latest.zip  --overwrite-dest",
-    "build:extension": "webpack build && yarn build:copy",
+    "build:extension": "webpack build && yarn build:copy && yarn build:version",
     "build:watch": "nodemon --exec 'NODE_ENV=development yarn build:chrome' --watch '*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
     "build:watch:firefox": "nodemon --exec 'yarn build:firefox' --watch '*' --ignore 'dist-chrome/*' --ignore 'dist-firefox/*'",
     "build:chrome": "RUNTIME_BROWSER=chrome yarn build:extension",
     "build:firefox": "RUNTIME_BROWSER=firefox yarn build:extension",
-    "build:copy": "./script/copy_files.sh",
+    "build:version": "node ./scripts/updateVersion.js",
+    "build:copy": "./scripts/copy_files.sh",
     "start:firefox": "web-ext run --source-dir ./dist-firefox/"
   },
   "dependencies": {
