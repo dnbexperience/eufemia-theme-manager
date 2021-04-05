@@ -14,5 +14,10 @@
     "build:firefox": "yarn workspace eufemia-theme-manager-extension build:firefox",
     "dev": "yarn workspace eufemia-theme-manager-extension build:watch"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  }
 }
