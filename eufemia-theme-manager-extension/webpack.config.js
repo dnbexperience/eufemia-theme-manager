@@ -14,9 +14,31 @@ if (typeof process !== 'undefined') {
 module.exports = {
   optimization: {
     minimize: false,
+    // runtimeChunk: 'single',// generated runtime.*.js – does not work inside Figma
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
   },
   performance: {
     hints: false,
+  },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename],
+    },
+  },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    port: 3000,
+    compress: false,
   },
   entry: {
     main: './src/app/root.jsx',
@@ -53,15 +75,9 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
       },
     ],
-  },
-  devtool: 'source-map',
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    port: 3000,
-    compress: false,
   },
   plugins: [
     new MiniCssExtractPlugin({
